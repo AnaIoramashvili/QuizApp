@@ -76,6 +76,7 @@ class StartPageViewController: UIViewController {
         removeKeyboardObservers()
     }
     
+    // MARK: - Setup Functions
     private func setupUI() {
         view.backgroundColor = Constants.Colors.backgroundWhite
     }
