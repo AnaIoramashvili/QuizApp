@@ -9,10 +9,22 @@ import UIKit
 
 struct Constants {
     
+    struct Images {
+        static let backgroundShape = "backgroundShape"
+        static let studentIllustration = "student_illustration"
+    }
+    
+    struct Label {
+        static let labelText = "ჩემი პირველი ქვიზი"
+        static let startButtonText = "ქვიზის დაწყება"
+        static let placeholderText = "შეიყვანე სახელი"
+    }
+    
     struct Colors {
-        static let yellowPrimary = UIColor.yellowPrimary
-        static let backgroundWhite = UIColor.white
-        static let textWhite = UIColor.white
+        static let buttonColor = UIColor(hex: "#FFC44A")
+        static let borderColor = UIColor(hex: "#FFC44A")
+        static let neutralWhite: UIColor = .white
+        static let neutralGrey = UIColor(hex: "#B3B3B3")
     }
     
     struct FontSizes {
@@ -34,6 +46,8 @@ struct Constants {
         static let illustrationImageWidth: CGFloat = 229
         static let illustrationImageHeight: CGFloat = 229
         static let textFieldHeight: CGFloat = 44
+        static let startButtonLeadingPadding: CGFloat = 117
+        static let startButtonTrailingPadding: CGFloat = 117
         static let startButtonWidth: CGFloat = 141
         static let startButtonHeight: CGFloat = 44
         

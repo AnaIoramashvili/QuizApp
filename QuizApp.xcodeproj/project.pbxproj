@@ -14,6 +14,8 @@
 		59202CB62CE374770008BD59 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 59202CB52CE374770008BD59 /* Base */; };
 		59202CC32CE3A8A30008BD59 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59202CC22CE3A8A30008BD59 /* Constants.swift */; };
 		59202CC62CE3AA750008BD59 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59202CC52CE3AA750008BD59 /* UIViewExtension.swift */; };
+		5938F8152CE4D6B800B56916 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938F8142CE4D6B800B56916 /* UIColorExtension.swift */; };
+		5938F8182CE4D6D300B56916 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938F8172CE4D6D300B56916 /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		59202CB72CE374770008BD59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59202CC22CE3A8A30008BD59 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		59202CC52CE3AA750008BD59 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		5938F8142CE4D6B800B56916 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		5938F8172CE4D6D300B56916 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 		59202CA82CE374730008BD59 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
+				5938F8162CE4D6CC00B56916 /* Custom */,
 				59202CBD2CE381970008BD59 /* App */,
 				59202CBE2CE381A80008BD59 /* Screens */,
 				59202CC12CE3A8950008BD59 /* Constants */,
@@ -114,8 +119,17 @@
 			isa = PBXGroup;
 			children = (
 				59202CC52CE3AA750008BD59 /* UIViewExtension.swift */,
+				5938F8142CE4D6B800B56916 /* UIColorExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5938F8162CE4D6CC00B56916 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				5938F8172CE4D6D300B56916 /* CustomButton.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,7 +206,9 @@
 				59202CAE2CE374730008BD59 /* StartPageViewController.swift in Sources */,
 				59202CAA2CE374730008BD59 /* AppDelegate.swift in Sources */,
 				59202CAC2CE374730008BD59 /* SceneDelegate.swift in Sources */,
+				5938F8182CE4D6D300B56916 /* CustomButton.swift in Sources */,
 				59202CC32CE3A8A30008BD59 /* Constants.swift in Sources */,
+				5938F8152CE4D6B800B56916 /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
