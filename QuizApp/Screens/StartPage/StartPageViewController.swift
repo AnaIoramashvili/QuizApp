@@ -108,31 +108,60 @@ class StartPageViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        stackViewTopConstraint = inputStackView.topAnchor.constraint(equalTo: illustrationImageView.bottomAnchor, constant: Constants.Layout.textFieldTopPadding)
-        
+        setupBackgroundImageConstraints()
+        setupTitleLabelConstraints()
+        setupIllustrationImageConstraints()
+        setupStackViewConstraints()
+        setupTextFieldConstraints()
+        setupStartButtonConstraints()
+    }
+
+    private func setupBackgroundImageConstraints() {
         NSLayoutConstraint.activate([
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImageView.heightAnchor.constraint(equalToConstant: Constants.Layout.backgroundImageHeight),
-            
+            backgroundImageView.heightAnchor.constraint(equalToConstant: Constants.Layout.backgroundImageHeight)
+        ])
+    }
+
+    private func setupTitleLabelConstraints() {
+        NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.Layout.titleLabelTopPadding),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+
+    private func setupIllustrationImageConstraints() {
+        NSLayoutConstraint.activate([
             illustrationImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.Layout.illustrationTopPadding),
             illustrationImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.illustrationLeadingPadding),
             illustrationImageView.widthAnchor.constraint(equalToConstant: Constants.Layout.illustrationImageWidth),
-            illustrationImageView.heightAnchor.constraint(equalToConstant: Constants.Layout.illustrationImageHeight),
-            
+            illustrationImageView.heightAnchor.constraint(equalToConstant: Constants.Layout.illustrationImageHeight)
+        ])
+    }
+
+    private func setupStackViewConstraints() {
+        stackViewTopConstraint = inputStackView.topAnchor.constraint(equalTo: illustrationImageView.bottomAnchor, constant: Constants.Layout.textFieldTopPadding)
+        
+        NSLayoutConstraint.activate([
             stackViewTopConstraint,
             inputStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.textFieldHorizontalPadding),
-            inputStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.textFieldHorizontalPadding),
-            
+            inputStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.textFieldHorizontalPadding)
+        ])
+    }
+
+    private func setupTextFieldConstraints() {
+        NSLayoutConstraint.activate([
             textField.heightAnchor.constraint(equalToConstant: Constants.Layout.textFieldHeight),
-            textField.widthAnchor.constraint(equalTo: inputStackView.widthAnchor),
-            
+            textField.widthAnchor.constraint(equalTo: inputStackView.widthAnchor)
+        ])
+    }
+
+    private func setupStartButtonConstraints() {
+        NSLayoutConstraint.activate([
             startButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.startButtonLeadingPadding),
-            startButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.startButtonTrailingPadding),
+            startButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.startButtonTrailingPadding)
         ])
     }
     
