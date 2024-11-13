@@ -82,7 +82,13 @@ class StartPageViewController: UIViewController {
     }
     
     private func setupHierarchy() {
-        view.addSubviews(backgroundImageView, titleLabel, illustrationImageView, textField, startButton)
+        view.addSubviews(
+        backgroundImageView,
+         titleLabel, 
+         illustrationImageView, 
+         textField,
+          startButton
+          )
     }
     
     private func setupConstraints() {
