@@ -78,7 +78,7 @@ class StartPageViewController: UIViewController {
     
     // MARK: - Setup Functions
     private func setupUI() {
-        view.backgroundColor = Constants.Colors.backgroundWhite
+        view.backgroundColor = .black
     }
     
     private func setupHierarchy() {
