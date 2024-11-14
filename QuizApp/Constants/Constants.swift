@@ -45,9 +45,6 @@ struct Constants {
         static let backgroundImageTopAnchor: CGFloat = 0
         static let backgroundImageHeightMultiplier: CGFloat = 0.5
         static let keyboardAdjustmentOffset: CGFloat = -150
-        static let backgroundImageHeight: CGFloat = 433
-        static let illustrationImageWidth: CGFloat = 229
-        static let illustrationImageHeight: CGFloat = 229
         static let textFieldHeight: CGFloat = 44
         static let startButtonLeadingPadding: CGFloat = 117
         static let startButtonTrailingPadding: CGFloat = 117
@@ -57,6 +54,8 @@ struct Constants {
         static let titleLabelTopPadding: CGFloat = 121
         static let illustrationTopPadding: CGFloat = 34
         static let illustrationLeadingPadding: CGFloat = 73
+        static let illustrationTrailingPadding: CGFloat = -73
+        static let illustrationBottomPadding: CGFloat = -23
         static let textFieldTopPadding: CGFloat = 115
         static let textFieldHorizontalPadding: CGFloat = 54
         static let startButtonTopPadding: CGFloat = 26

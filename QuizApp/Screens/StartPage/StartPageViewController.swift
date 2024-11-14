@@ -122,7 +122,7 @@ class StartPageViewController: UIViewController {
             backgroundImageTopConstraint,
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImageView.heightAnchor.constraint(equalToConstant: Constants.Layout.backgroundImageHeight)
+            backgroundImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Constants.Layout.backgroundImageHeightMultiplier)
         ])
     }
 
@@ -137,8 +137,8 @@ class StartPageViewController: UIViewController {
         NSLayoutConstraint.activate([
             illustrationImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.Layout.illustrationTopPadding),
             illustrationImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.illustrationLeadingPadding),
-            illustrationImageView.widthAnchor.constraint(equalToConstant: Constants.Layout.illustrationImageWidth),
-            illustrationImageView.heightAnchor.constraint(equalToConstant: Constants.Layout.illustrationImageHeight)
+            illustrationImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.Layout.illustrationTrailingPadding),
+            illustrationImageView.bottomAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: Constants.Layout.illustrationBottomPadding)
         ])
     }
 
