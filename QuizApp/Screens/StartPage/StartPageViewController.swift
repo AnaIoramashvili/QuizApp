@@ -10,7 +10,7 @@ import UIKit
 class StartPageViewController: UIViewController {
     
     // MARK: - Properties
-    private var stackViewTopConstraint: NSLayoutConstraint!
+    private var backgroundImageTopConstraint: NSLayoutConstraint!
     
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
@@ -55,7 +55,6 @@ class StartPageViewController: UIViewController {
     private let startButton: CustomButton = {
         let button = CustomButton(
             title: Constants.Label.startButtonText,
-            width: Constants.Layout.startButtonWidth,
             height: Constants.Layout.startButtonHeight
         )
         return button
@@ -66,7 +65,6 @@ class StartPageViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = Constants.Layout.startButtonTopPadding
         stackView.alignment = .center
-        stackView.distribution = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -76,6 +74,7 @@ class StartPageViewController: UIViewController {
         super.viewDidLoad()
         setUp()
         setupKeyboardObservers()
+        setupTapGesture() 
     }
     
     private func setUp() {
@@ -117,8 +116,10 @@ class StartPageViewController: UIViewController {
     }
 
     private func setupBackgroundImageConstraints() {
+        backgroundImageTopConstraint = backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.Layout.backgroundImageTopAnchor)
+        
         NSLayoutConstraint.activate([
-            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImageTopConstraint,
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImageView.heightAnchor.constraint(equalToConstant: Constants.Layout.backgroundImageHeight)
@@ -127,14 +128,14 @@ class StartPageViewController: UIViewController {
 
     private func setupTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.Layout.titleLabelTopPadding),
+            titleLabel.topAnchor.constraint(equalTo: backgroundImageView.topAnchor, constant: Constants.Layout.titleLabelTopPadding),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 
     private func setupIllustrationImageConstraints() {
         NSLayoutConstraint.activate([
-            illustrationImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.Layout.illustrationTopPadding),
+            illustrationImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.Layout.illustrationTopPadding),
             illustrationImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.illustrationLeadingPadding),
             illustrationImageView.widthAnchor.constraint(equalToConstant: Constants.Layout.illustrationImageWidth),
             illustrationImageView.heightAnchor.constraint(equalToConstant: Constants.Layout.illustrationImageHeight)
@@ -142,19 +143,16 @@ class StartPageViewController: UIViewController {
     }
 
     private func setupStackViewConstraints() {
-        stackViewTopConstraint = inputStackView.topAnchor.constraint(equalTo: illustrationImageView.bottomAnchor, constant: Constants.Layout.textFieldTopPadding)
-        
         NSLayoutConstraint.activate([
-            stackViewTopConstraint,
-            inputStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.textFieldHorizontalPadding),
-            inputStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.textFieldHorizontalPadding)
+            inputStackView.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: Constants.Layout.backgroundBottom)
         ])
     }
 
     private func setupTextFieldConstraints() {
         NSLayoutConstraint.activate([
             textField.heightAnchor.constraint(equalToConstant: Constants.Layout.textFieldHeight),
-            textField.widthAnchor.constraint(equalTo: inputStackView.widthAnchor)
+            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.textFieldHorizontalPadding),
+            textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Layout.textFieldHorizontalPadding)
         ])
     }
 
@@ -194,22 +192,28 @@ class StartPageViewController: UIViewController {
         )
     }
     
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            let keyboardHeight = keyboardFrame.height
-            stackViewTopConstraint.constant = -keyboardHeight/2
-            
-            UIView.animate(withDuration: 0.1) {
-                self.view.layoutIfNeeded()
-            }
+    @objc private func keyboardWillShow() {
+        backgroundImageTopConstraint.constant = Constants.Layout.keyboardAdjustmentOffset
+        UIView.animate(withDuration: 0.1) {
+            self.view.layoutIfNeeded()
         }
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        stackViewTopConstraint.constant = Constants.Layout.textFieldTopPadding
-        
+        backgroundImageTopConstraint.constant = Constants.Layout.backgroundImageTopAnchor
         UIView.animate(withDuration: 0.1) {
             self.view.layoutIfNeeded()
         }
+    }
+    
+    // MARK: - Tap Gesture Setup
+    private func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

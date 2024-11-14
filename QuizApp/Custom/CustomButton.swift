@@ -9,12 +9,10 @@ import UIKit
 
 class CustomButton: UIButton {
     // MARK: - Properties
-    private var buttonWidth: CGFloat
     private var buttonHeight: CGFloat
     
     // MARK: - Initialization
-    init(title: String, width: CGFloat, height: CGFloat) {
-        self.buttonWidth = width
+    init(title: String, height: CGFloat) {
         self.buttonHeight = height
         super.init(frame: .zero)
         setup(with: title)
@@ -32,16 +30,18 @@ class CustomButton: UIButton {
         titleLabel?.font = .systemFont(ofSize: Constants.FontSizes.buttonFontSize, weight: .semibold)
         layer.cornerRadius = Constants.Layout.startButtonCornerRadius
         translatesAutoresizingMaskIntoConstraints = false
+        setupHeightConstraint()
     }
     
     // MARK: - Layout
-    override var intrinsicContentSize: CGSize {
-        return CGSize(width: buttonWidth, height: buttonHeight)
+    private func setupHeightConstraint() {
+        NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: buttonHeight)
+        ])
     }
     
     // MARK: - Public Methods
-    func updateSize(width: CGFloat, height: CGFloat) {
-        self.buttonWidth = width
+    func updateSize(height: CGFloat) {
         self.buttonHeight = height
         invalidateIntrinsicContentSize()
     }

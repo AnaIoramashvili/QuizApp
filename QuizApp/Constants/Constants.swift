@@ -42,22 +42,25 @@ struct Constants {
         static let textFieldBorderWidth: CGFloat = 1
         
         // Heights and Widths
+        static let backgroundImageTopAnchor: CGFloat = 0
+        static let backgroundImageHeightMultiplier: CGFloat = 0.5
+        static let keyboardAdjustmentOffset: CGFloat = -150
         static let backgroundImageHeight: CGFloat = 433
         static let illustrationImageWidth: CGFloat = 229
         static let illustrationImageHeight: CGFloat = 229
         static let textFieldHeight: CGFloat = 44
         static let startButtonLeadingPadding: CGFloat = 117
         static let startButtonTrailingPadding: CGFloat = 117
-        static let startButtonWidth: CGFloat = 141
         static let startButtonHeight: CGFloat = 44
         
         // Spacing and Padding
         static let titleLabelTopPadding: CGFloat = 121
-        static let illustrationTopPadding: CGFloat = 181
+        static let illustrationTopPadding: CGFloat = 34
         static let illustrationLeadingPadding: CGFloat = 73
         static let textFieldTopPadding: CGFloat = 115
         static let textFieldHorizontalPadding: CGFloat = 54
         static let startButtonTopPadding: CGFloat = 26
+        static let backgroundBottom: CGFloat = 92
     }
 }
 
