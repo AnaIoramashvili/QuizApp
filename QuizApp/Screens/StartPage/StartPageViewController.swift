@@ -25,7 +25,7 @@ class StartPageViewController: UIViewController {
         label.text = Constants.Label.labelText
         label.textAlignment = .center
         label.textColor = Constants.Colors.neutralWhite
-        label.font = UIFont.systemFont(ofSize: Constants.FontSizes.titleFontSize, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: Constants.FontSizes.big, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -41,7 +41,7 @@ class StartPageViewController: UIViewController {
     private let textField: UITextField = {
         let field = UITextField()
         field.placeholder = Constants.Label.placeholderText
-        field.font = UIFont.systemFont(ofSize: Constants.FontSizes.textFieldFontSize)
+        field.font = UIFont.systemFont(ofSize: Constants.FontSizes.small)
         field.borderStyle = .none
         field.backgroundColor = Constants.Colors.neutralWhite
         field.layer.borderWidth = Constants.Layout.textFieldBorderWidth

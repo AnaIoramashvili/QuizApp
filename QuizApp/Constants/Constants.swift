@@ -20,23 +20,38 @@ struct Constants {
         static let placeholderText = "შეიყვანე სახელი"
     }
     
+    struct HomeLabel {
+        static let helloText = "გამარჯობა, ირაკლი"
+        static let chooseSubject = "აირჩიე საგანი"
+        static let gpaText = "GPA -"
+        static let gpaDigit = "4.0"
+    }
+    
     struct Colors {
         static let buttonColor = UIColor(hex: "#FFC44A")
         static let borderColor = UIColor(hex: "#FFC44A")
         static let neutralWhite: UIColor = .white
         static let neutralGrey = UIColor(hex: "#B3B3B3")
+        static let neutralLighterGray = UIColor(hex: "#F6F6F6")
+        static let neutralDarkGrey = UIColor(hex: "#1D1D1D")
+        static let yellowPrimary = UIColor(hex: "#FFC44A")
+        static let blueSecondaryDefault = UIColor(hex: "#537FE7")
+        static let blueSecondaryLighter = UIColor(hex: "#6B91EA")
     }
     
     struct FontSizes {
-        static let titleFontSize: CGFloat = 20
-        static let buttonFontSize: CGFloat = 12
-        static let textFieldFontSize: CGFloat = 12
+        static let small: CGFloat = 12
+        static let medium: CGFloat = 16
+        static let big: CGFloat = 20
     }
     
     struct Layout {
         // Corner Radius
         static let textFieldCornerRadius: CGFloat = 12
         static let startButtonCornerRadius: CGFloat = 12
+        static let gpaViewCornerRadius: CGFloat = 26
+        static let gpaClearViewCornerRadius: CGFloat = 14
+        static let containerCornerRadius: CGFloat = 26
         
         // Border Widths
         static let textFieldBorderWidth: CGFloat = 1
