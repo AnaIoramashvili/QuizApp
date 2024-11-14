@@ -90,6 +90,7 @@ class StartPageViewController: UIViewController {
     // MARK: - Setup Functions
     private func setupUI() {
         view.backgroundColor = Constants.Colors.neutralWhite
+        navigationController?.isNavigationBarHidden = true
     }
     
     private func setupHierarchy() {
@@ -116,7 +117,7 @@ class StartPageViewController: UIViewController {
     }
 
     private func setupBackgroundImageConstraints() {
-        backgroundImageTopConstraint = backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.Layout.backgroundImageTopAnchor)
+        backgroundImageTopConstraint = backgroundImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.Layout.backgroundImageTopAnchor)
         
         NSLayoutConstraint.activate([
             backgroundImageTopConstraint,
