@@ -115,11 +115,11 @@ struct Constants {
         // Spacing and Padding
         static let containerVerticalPadding: CGFloat = 6
         static let containerHorizontalPadding: CGFloat = 16
-        static let iconLeadingPadding: CGFloat = 16
+        static let iconLeadingPadding: CGFloat = 26
         static let titleTopPadding: CGFloat = 35
         static let labelLeadingPadding: CGFloat = 12
         static let descriptionTopPadding: CGFloat = 2
-        static let arrowTrailingPadding: CGFloat = -16
+        static let arrowTrailingPadding: CGFloat = -26
     }
 }
 
