@@ -17,9 +17,5 @@ let subjects: [Subject] = [
     Subject(icon: UIImage(named: "geography")!, title: "გეოგრაფია", description: "აღწერა"),
     Subject(icon: UIImage(named: "programming")!, title: "პროგრამირება", description: "აღწერა"),
     Subject(icon: UIImage(named: "history")!, title: "ისტორია", description: "აღწერა"),
-    Subject(icon: UIImage(named: "physics")!, title: "ფიზიკა", description: "აღწერა"),
-    Subject(icon: UIImage(named: "geography")!, title: "გეოგრაფია", description: "აღწერა"),
-    Subject(icon: UIImage(named: "programming")!, title: "პროგრამირება", description: "აღწერა"),
-    Subject(icon: UIImage(named: "history")!, title: "ისტორია", description: "აღწერა"),
     Subject(icon: UIImage(named: "physics")!, title: "ფიზიკა", description: "აღწერა")
 ]

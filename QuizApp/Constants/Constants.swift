@@ -14,6 +14,7 @@ struct Constants {
         static let studentIllustration = "student_illustration"
         static let nextArrow = "next_arrow"
         static let arrowButton = "arrow"
+        static let logOutButton = "logOut"
     }
     
     struct Label {
@@ -93,6 +94,8 @@ struct Constants {
         static let tableViewTopPadding: CGFloat = 16
         static let bottomSeparatorLine: CGFloat = 1
         static let bottomSeparatorLinePadding: CGFloat = -65
+        static let logOutButtonLeadingPadding: CGFloat = 317
+        static let logoutButtonBottomPadding: CGFloat = -11
     
         //Text
         static let helloText = "გამარჯობა, ირაკლი"

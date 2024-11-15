@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StartPageViewController: UIViewController {
+final class StartPageViewController: UIViewController {
     
     // MARK: - Properties
     private var backgroundImageTopConstraint: NSLayoutConstraint!

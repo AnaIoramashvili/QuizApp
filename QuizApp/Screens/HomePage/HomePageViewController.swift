@@ -99,13 +99,19 @@ final class HomePageViewController: UIViewController {
         return view
     }()
     
+    private let logOutButton: UIButton = {
+        let logOutButton = CustomRoundButton()
+        logOutButton.configure(with: UIImage(named: Constants.Images.logOutButton))
+        return logOutButton
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = Constants.Colors.neutralWhite
         navigationController?.isNavigationBarHidden = true
         setupTableView()
         setUpHierarchy()
@@ -127,7 +133,8 @@ final class HomePageViewController: UIViewController {
             nextArrow,
             subjectsLabel,
             tableView,
-            bottomSeparatorLine
+            bottomSeparatorLine,
+            logOutButton
         )
     }
     
@@ -168,7 +175,10 @@ final class HomePageViewController: UIViewController {
              bottomSeparatorLine.leadingAnchor.constraint(equalTo: view.leadingAnchor),
              bottomSeparatorLine.trailingAnchor.constraint(equalTo: view.trailingAnchor),
              bottomSeparatorLine.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.bottomSeparatorLine),
-             bottomSeparatorLine.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.HomePageConstants.bottomSeparatorLinePadding)
+             bottomSeparatorLine.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.HomePageConstants.bottomSeparatorLinePadding),
+             
+             logOutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.HomePageConstants.logOutButtonLeadingPadding),
+             logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.HomePageConstants.logoutButtonBottomPadding)
          ])
      }
     
