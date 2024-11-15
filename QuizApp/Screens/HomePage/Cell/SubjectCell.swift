@@ -96,20 +96,44 @@ final class SubjectCell: UITableViewCell {
     }
     
     private func setUpConstraints() {
-        NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.SubjectTableViewCellConstants.containerVerticalPadding),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.SubjectTableViewCellConstants.containerHorizontalPadding),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.SubjectTableViewCellConstants.containerHorizontalPadding),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.SubjectTableViewCellConstants.containerVerticalPadding),
-            containerView.heightAnchor.constraint(equalToConstant: Constants.SubjectTableViewCellConstants.containerHeight),
-            
-            contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.SubjectTableViewCellConstants.iconLeadingPadding),
-            contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: Constants.SubjectTableViewCellConstants.arrowTrailingPadding),
-            contentStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            
-            iconImageView.widthAnchor.constraint(equalToConstant: Constants.SubjectTableViewCellConstants.iconSize),
-            iconImageView.heightAnchor.constraint(equalToConstant: Constants.SubjectTableViewCellConstants.iconSize)
-        ])
+        NSLayoutConstraint.activate(
+            [
+                containerView.topAnchor.constraint(
+                    equalTo: contentView.topAnchor,
+                    constant: Constants.SubjectTableViewCellConstants.containerVerticalPadding
+                ),
+                containerView.leadingAnchor.constraint(
+                    equalTo: contentView.leadingAnchor,
+                    constant: Constants.SubjectTableViewCellConstants.containerHorizontalPadding
+                ),
+                containerView.trailingAnchor.constraint(
+                    equalTo: contentView.trailingAnchor,
+                    constant: -Constants.SubjectTableViewCellConstants.containerHorizontalPadding
+                ),
+                containerView.bottomAnchor.constraint(
+                    equalTo: contentView.bottomAnchor,
+                    constant: -Constants.SubjectTableViewCellConstants.containerVerticalPadding
+                ),
+                containerView.heightAnchor.constraint(equalToConstant: Constants.SubjectTableViewCellConstants.containerHeight),
+                
+                contentStackView.leadingAnchor.constraint(
+                    equalTo: containerView.leadingAnchor,
+                    constant: Constants.SubjectTableViewCellConstants.iconLeadingPadding
+                ),
+                contentStackView.trailingAnchor.constraint(
+                    equalTo: containerView.trailingAnchor,
+                    constant: Constants.SubjectTableViewCellConstants.arrowTrailingPadding
+                ),
+                contentStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
+                
+                iconImageView.widthAnchor.constraint(
+                    equalToConstant: Constants.SubjectTableViewCellConstants.iconSize
+                ),
+                iconImageView.heightAnchor.constraint(
+                    equalToConstant: Constants.SubjectTableViewCellConstants.iconSize
+                )
+            ]
+        )
     }
     
     func configure(with subject: Subject) {

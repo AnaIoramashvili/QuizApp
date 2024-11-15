@@ -21,6 +21,7 @@
 		5938F8212CE62B6500B56916 /* SubjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938F8202CE62B6500B56916 /* SubjectCell.swift */; };
 		5938F8232CE62F9300B56916 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938F8222CE62F9300B56916 /* Subject.swift */; };
 		5938F8272CE63A7C00B56916 /* CustomRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938F8262CE63A7C00B56916 /* CustomRoundButton.swift */; };
+		5994AF512CE77939006B4B2C /* GPAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF502CE77939006B4B2C /* GPAView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		5938F8202CE62B6500B56916 /* SubjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCell.swift; sourceTree = "<group>"; };
 		5938F8222CE62F9300B56916 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		5938F8262CE63A7C00B56916 /* CustomRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundButton.swift; sourceTree = "<group>"; };
+		5994AF502CE77939006B4B2C /* GPAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPAView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				5938F81E2CE6251E00B56916 /* HomePageViewController.swift */,
+				5994AF502CE77939006B4B2C /* GPAView.swift */,
 				5938F8242CE6397C00B56916 /* Model */,
 				5938F8252CE6398400B56916 /* Cell */,
 			);
@@ -251,6 +254,7 @@
 				59202CAC2CE374730008BD59 /* SceneDelegate.swift in Sources */,
 				5938F8182CE4D6D300B56916 /* CustomButton.swift in Sources */,
 				5938F8272CE63A7C00B56916 /* CustomRoundButton.swift in Sources */,
+				5994AF512CE77939006B4B2C /* GPAView.swift in Sources */,
 				59202CC32CE3A8A30008BD59 /* Constants.swift in Sources */,
 				5938F8152CE4D6B800B56916 /* UIColorExtension.swift in Sources */,
 			);

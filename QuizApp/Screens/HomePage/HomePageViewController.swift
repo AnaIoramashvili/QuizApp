@@ -18,61 +18,10 @@ final class HomePageViewController: UIViewController {
         return label
     }()
     
-    private let gpaView: UIView = {
-        let view = UIView()
-        view.backgroundColor = Constants.Colors.blueSecondaryDefault
-        view.layer.cornerRadius = Constants.Layout.gpaViewCornerRadius
+    private let gpaView: GPAView = {
+        let view = GPAView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-    }()
-    
-    private let gpaClearView: UIView = {
-        let view = UIView()
-        view.backgroundColor = Constants.Colors.blueSecondaryLighter
-        view.layer.cornerRadius = Constants.Layout.gpaClearViewCornerRadius
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private let gpaStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = Constants.HomePageConstants.gpaStackViewSpacing
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
-    private let gpaLabel: UILabel = {
-        let label = UILabel()
-        label.text = Constants.HomePageConstants.gpaText
-        label.textColor = Constants.Colors.neutralWhite
-        label.font = UIFont.systemFont(ofSize: Constants.FontSizes.medium)
-        return label
-    }()
-    
-    private let gpaDigit: UILabel = {
-        let label = UILabel()
-        label.text = Constants.HomePageConstants.gpaDigit
-        label.textColor = Constants.Colors.yellowPrimary
-        label.font = UIFont.systemFont(ofSize: Constants.FontSizes.medium)
-        return label
-    }()
-    
-    private let detailsButton: UIButton = {
-        let button = UIButton()
-        button.setTitle(Constants.HomePageConstants.detailsButtonText, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    private let nextArrow: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: Constants.Images.nextArrow)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
     }()
     
     private let subjectsLabel: UILabel = {
@@ -119,18 +68,9 @@ final class HomePageViewController: UIViewController {
     }
     
     private func setUpHierarchy() {
-        gpaStackView.addArrangedSubviews(
-            gpaLabel,
-            gpaDigit
-        )
-        
         view.addSubviews(
             headerLabel,
             gpaView,
-            gpaClearView,
-            gpaStackView,
-            detailsButton,
-            nextArrow,
             subjectsLabel,
             tableView,
             bottomSeparatorLine,
@@ -139,47 +79,66 @@ final class HomePageViewController: UIViewController {
     }
     
     private func setUpConstraints() {
-         NSLayoutConstraint.activate([
-             headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.HomePageConstants.headerTopPadding),
-             headerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.HomePageConstants.horizontalPadding),
-             
-             gpaView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: Constants.HomePageConstants.gpaViewTopPadding),
-             gpaView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.HomePageConstants.horizontalPadding),
-             gpaView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.HomePageConstants.horizontalPadding),
-             gpaView.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.gpaViewHeight),
-             
-             gpaClearView.leadingAnchor.constraint(equalTo: gpaView.leadingAnchor, constant: Constants.HomePageConstants.gpaClearViewLeadingPadding),
-             gpaClearView.centerYAnchor.constraint(equalTo: gpaView.centerYAnchor),
-             gpaClearView.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.gpaClearViewHeight),
-             
-             gpaStackView.leadingAnchor.constraint(equalTo: gpaClearView.leadingAnchor, constant: Constants.HomePageConstants.gpaStackViewPadding),
-             gpaStackView.trailingAnchor.constraint(equalTo: gpaClearView.trailingAnchor, constant: -Constants.HomePageConstants.gpaStackViewPadding),
-             gpaStackView.centerYAnchor.constraint(equalTo: gpaClearView.centerYAnchor),
-             
-             detailsButton.trailingAnchor.constraint(equalTo: gpaView.trailingAnchor, constant: Constants.HomePageConstants.detailsButtonTrailingPadding),
-             detailsButton.centerYAnchor.constraint(equalTo: gpaView.centerYAnchor),
-             
-             nextArrow.trailingAnchor.constraint(equalTo: gpaView.trailingAnchor, constant: Constants.HomePageConstants.nextArrowTrailingPadding),
-             nextArrow.centerYAnchor.constraint(equalTo: gpaView.centerYAnchor),
-             nextArrow.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.nextArrowHeight),
-             nextArrow.widthAnchor.constraint(equalToConstant: Constants.HomePageConstants.nextArrowWidth),
-             
-             subjectsLabel.topAnchor.constraint(equalTo: gpaView.bottomAnchor, constant: Constants.HomePageConstants.subjectsLabelTopPadding),
-             subjectsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.HomePageConstants.horizontalPadding),
-             
-             tableView.topAnchor.constraint(equalTo: subjectsLabel.bottomAnchor, constant: Constants.HomePageConstants.tableViewTopPadding),
-             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-             tableView.bottomAnchor.constraint(equalTo: bottomSeparatorLine.topAnchor),
-
-             bottomSeparatorLine.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-             bottomSeparatorLine.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-             bottomSeparatorLine.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.bottomSeparatorLine),
-             bottomSeparatorLine.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.HomePageConstants.bottomSeparatorLinePadding),
-             
-             logOutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.HomePageConstants.logOutButtonLeadingPadding),
-             logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.HomePageConstants.logoutButtonBottomPadding)
-         ])
+        NSLayoutConstraint.activate(
+            [
+                headerLabel.topAnchor.constraint(
+                    equalTo: view.safeAreaLayoutGuide.topAnchor,
+                    constant: Constants.HomePageConstants.headerTopPadding
+                ),
+                headerLabel.leadingAnchor.constraint(
+                    equalTo: view.leadingAnchor,
+                    constant: Constants.HomePageConstants.horizontalPadding
+                ),
+                
+                gpaView.topAnchor.constraint(
+                    equalTo: headerLabel.bottomAnchor,
+                    constant: Constants.HomePageConstants.gpaViewTopPadding
+                ),
+                gpaView.leadingAnchor.constraint(
+                    equalTo: view.leadingAnchor,
+                    constant: Constants.HomePageConstants.horizontalPadding
+                ),
+                gpaView.trailingAnchor.constraint(
+                    equalTo: view.trailingAnchor,
+                    constant: -Constants.HomePageConstants.horizontalPadding
+                ),
+                subjectsLabel.topAnchor.constraint(
+                    equalTo: gpaView.bottomAnchor,
+                    constant: Constants.HomePageConstants.subjectsLabelTopPadding
+                ),
+                subjectsLabel.leadingAnchor.constraint(
+                    equalTo: view.leadingAnchor,
+                    constant: Constants.HomePageConstants.horizontalPadding
+                ),
+                
+                tableView.topAnchor.constraint(
+                    equalTo: subjectsLabel.bottomAnchor,
+                    constant: Constants.HomePageConstants.tableViewTopPadding
+                ),
+                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                tableView.bottomAnchor.constraint(equalTo: bottomSeparatorLine.topAnchor),
+                
+                bottomSeparatorLine.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                bottomSeparatorLine.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                bottomSeparatorLine.heightAnchor.constraint(
+                    equalToConstant: Constants.HomePageConstants.bottomSeparatorLine
+                ),
+                bottomSeparatorLine.bottomAnchor.constraint(
+                    equalTo: view.bottomAnchor,
+                    constant: Constants.HomePageConstants.bottomSeparatorLinePadding
+                ),
+                
+                logOutButton.leadingAnchor.constraint(
+                    equalTo: view.leadingAnchor,
+                    constant: Constants.HomePageConstants.logOutButtonLeadingPadding
+                ),
+                logOutButton.bottomAnchor.constraint(
+                    equalTo: view.bottomAnchor,
+                    constant: Constants.HomePageConstants.logoutButtonBottomPadding
+                )
+            ]
+        )
      }
     
     private func setupTableView() {
