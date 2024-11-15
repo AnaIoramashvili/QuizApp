@@ -52,7 +52,7 @@ final class GPAView: UIView {
     private let detailsButton: UIButton = {
         let button = UIButton()
         button.setTitle(Constants.HomePageConstants.detailsButtonText, for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(Constants.Colors.neutralWhite, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -64,9 +64,7 @@ final class GPAView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
-    var onDetailsButtonTapped: (() -> Void)?
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
