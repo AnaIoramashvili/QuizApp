@@ -12,19 +12,14 @@ struct Constants {
     struct Images {
         static let backgroundShape = "backgroundShape"
         static let studentIllustration = "student_illustration"
+        static let nextArrow = "next_arrow"
+        static let arrowButton = "arrow"
     }
     
     struct Label {
         static let labelText = "ჩემი პირველი ქვიზი"
         static let startButtonText = "ქვიზის დაწყება"
         static let placeholderText = "შეიყვანე სახელი"
-    }
-    
-    struct HomeLabel {
-        static let helloText = "გამარჯობა, ირაკლი"
-        static let chooseSubject = "აირჩიე საგანი"
-        static let gpaText = "GPA -"
-        static let gpaDigit = "4.0"
     }
     
     struct Colors {
@@ -75,6 +70,52 @@ struct Constants {
         static let textFieldHorizontalPadding: CGFloat = 54
         static let startButtonTopPadding: CGFloat = 26
         static let backgroundBottom: CGFloat = 92
+    }
+    
+    struct HomePageConstants {
+        // Heights and Widths
+        static let gpaViewHeight: CGFloat = 75
+        static let gpaClearViewHeight: CGFloat = 40
+        static let nextArrowHeight: CGFloat = 10
+        static let nextArrowWidth: CGFloat = 14
+        
+        // Spacing and Padding
+        static let headerTopPadding: CGFloat = 8
+        static let horizontalPadding: CGFloat = 16
+        static let gpaViewTopPadding: CGFloat = 20
+        static let gpaClearViewLeadingPadding: CGFloat = 18
+        static let gpaStackViewPadding: CGFloat = 12
+        static let detailsButtonTrailingPadding: CGFloat = -48
+        static let nextArrowTrailingPadding: CGFloat = -34
+        static let subjectsLabelTopPadding: CGFloat = 32
+        static let tableViewTopPadding: CGFloat = 16
+        
+        // Stack View
+        static let gpaStackViewSpacing: CGFloat = 4
+        
+        //Text
+        static let helloText = "გამარჯობა, ირაკლი"
+        static let chooseSubject = "აირჩიე საგანი"
+        static let gpaText = "GPA -"
+        static let gpaDigit = "4.0"
+        static let detailsButtonText = "დეტალურად"
+    }
+    
+    struct SubjectTableViewCellConstants {
+        static let identifier = "SubjectCell"
+        
+        // Heights and Widths
+        static let containerHeight: CGFloat = 106
+        static let iconSize: CGFloat = 64
+        
+        // Spacing and Padding
+        static let containerVerticalPadding: CGFloat = 6
+        static let containerHorizontalPadding: CGFloat = 16
+        static let iconLeadingPadding: CGFloat = 16
+        static let titleTopPadding: CGFloat = 35
+        static let labelLeadingPadding: CGFloat = 12
+        static let descriptionTopPadding: CGFloat = 2
+        static let arrowTrailingPadding: CGFloat = -16
     }
 }
 

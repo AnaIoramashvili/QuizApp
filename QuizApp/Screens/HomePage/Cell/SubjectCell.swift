@@ -7,8 +7,8 @@
 
 import UIKit
 
-class SubjectCell: UITableViewCell {
-    static let identifier = "SubjectCell"
+final class SubjectCell: UITableViewCell {
+    static let identifier = Constants.SubjectTableViewCellConstants.identifier
     
     private let containerView: UIView = {
         let view = UIView()
@@ -29,7 +29,6 @@ class SubjectCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: Constants.FontSizes.medium)
         label.textColor = Constants.Colors.neutralDarkGrey
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -37,14 +36,31 @@ class SubjectCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: Constants.FontSizes.small)
         label.textColor = Constants.Colors.neutralGrey
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let arrowButton: UIButton = {
         let arrowButton = CustomRoundButton()
-        arrowButton.configure(with: UIImage(named: "arrow"))
+        arrowButton.configure(with: UIImage(named: Constants.Images.arrowButton))
         return arrowButton
+    }()
+    
+    private let labelsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = Constants.SubjectTableViewCellConstants.descriptionTopPadding
+        stackView.alignment = .leading
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let contentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = Constants.SubjectTableViewCellConstants.labelLeadingPadding
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -65,35 +81,34 @@ class SubjectCell: UITableViewCell {
     
     private func setUpHierarchy() {
         contentView.addSubview(containerView)
-        containerView.addSubview(iconImageView)
-        containerView.addSubview(titleLabel)
-        containerView.addSubview(descriptionLabel)
-        containerView.addSubview(arrowButton)
+        containerView.addSubview(contentStackView)
+        
+        labelsStackView.addArrangedSubviews(
+            titleLabel,
+            descriptionLabel
+        )
+        
+        contentStackView.addArrangedSubviews(
+            iconImageView,
+            labelsStackView,
+            arrowButton
+        )
     }
     
     private func setUpConstraints() {
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
-            containerView.heightAnchor.constraint(equalToConstant: 106),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.SubjectTableViewCellConstants.containerVerticalPadding),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.SubjectTableViewCellConstants.containerHorizontalPadding),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.SubjectTableViewCellConstants.containerHorizontalPadding),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.SubjectTableViewCellConstants.containerVerticalPadding),
+            containerView.heightAnchor.constraint(equalToConstant: Constants.SubjectTableViewCellConstants.containerHeight),
             
-            iconImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            iconImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            iconImageView.widthAnchor.constraint(equalToConstant: 64),
-            iconImageView.heightAnchor.constraint(equalToConstant: 64),
+            contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.SubjectTableViewCellConstants.iconLeadingPadding),
+            contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: Constants.SubjectTableViewCellConstants.arrowTrailingPadding),
+            contentStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             
-            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 35),
-            titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 12),
-            titleLabel.trailingAnchor.constraint(equalTo: arrowButton.leadingAnchor, constant: -12),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
-            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            
-            arrowButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            arrowButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            iconImageView.widthAnchor.constraint(equalToConstant: Constants.SubjectTableViewCellConstants.iconSize),
+            iconImageView.heightAnchor.constraint(equalToConstant: Constants.SubjectTableViewCellConstants.iconSize)
         ])
     }
     
@@ -103,4 +118,3 @@ class SubjectCell: UITableViewCell {
         descriptionLabel.text = subject.description
     }
 }
-
