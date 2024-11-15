@@ -8,6 +8,9 @@
 import UIKit
 
 final class GPAView: UIView {
+    
+    // MARK: - Properties
+    
     private let gpaView: UIView = {
         let view = UIView()
         view.backgroundColor = Constants.Colors.blueSecondaryDefault
@@ -37,7 +40,7 @@ final class GPAView: UIView {
         let label = UILabel()
         label.text = Constants.HomePageConstants.gpaText
         label.textColor = Constants.Colors.neutralWhite
-        label.font = UIFont.systemFont(ofSize: Constants.FontSizes.medium)
+        label.font = .systemFont(ofSize: Constants.FontSizes.medium)
         return label
     }()
     
@@ -45,7 +48,7 @@ final class GPAView: UIView {
         let label = UILabel()
         label.text = Constants.HomePageConstants.gpaDigit
         label.textColor = Constants.Colors.yellowPrimary
-        label.font = UIFont.systemFont(ofSize: Constants.FontSizes.medium)
+        label.font = .systemFont(ofSize: Constants.FontSizes.medium)
         return label
     }()
     
@@ -64,7 +67,9 @@ final class GPAView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-        
+    
+    // MARK: - Initializers
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -74,9 +79,10 @@ final class GPAView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup Methods
+    
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
-        
         setupHierarchy()
         setupConstraints()
     }
@@ -97,20 +103,38 @@ final class GPAView: UIView {
     }
     
     private func setupConstraints() {
+        setupGPAViewConstraints()
+        setupGPAClearViewConstraints()
+        setupGPAStackViewConstraints()
+        setupDetailsButtonConstraints()
+        setupNextArrowConstraints()
+    }
+
+    // MARK: - Constraints Setup Methods
+    
+    private func setupGPAViewConstraints() {
         NSLayoutConstraint.activate([
             gpaView.topAnchor.constraint(equalTo: topAnchor),
             gpaView.leadingAnchor.constraint(equalTo: leadingAnchor),
             gpaView.trailingAnchor.constraint(equalTo: trailingAnchor),
             gpaView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            gpaView.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.gpaViewHeight),
-            
+            gpaView.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.gpaViewHeight)
+        ])
+    }
+
+    private func setupGPAClearViewConstraints() {
+        NSLayoutConstraint.activate([
             gpaClearView.leadingAnchor.constraint(
                 equalTo: gpaView.leadingAnchor,
                 constant: Constants.HomePageConstants.gpaClearViewLeadingPadding
             ),
             gpaClearView.centerYAnchor.constraint(equalTo: gpaView.centerYAnchor),
-            gpaClearView.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.gpaClearViewHeight),
-            
+            gpaClearView.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.gpaClearViewHeight)
+        ])
+    }
+
+    private func setupGPAStackViewConstraints() {
+        NSLayoutConstraint.activate([
             gpaStackView.leadingAnchor.constraint(
                 equalTo: gpaClearView.leadingAnchor,
                 constant: Constants.HomePageConstants.gpaStackViewPadding
@@ -119,14 +143,22 @@ final class GPAView: UIView {
                 equalTo: gpaClearView.trailingAnchor,
                 constant: -Constants.HomePageConstants.gpaStackViewPadding
             ),
-            gpaStackView.centerYAnchor.constraint(equalTo: gpaClearView.centerYAnchor),
-            
+            gpaStackView.centerYAnchor.constraint(equalTo: gpaClearView.centerYAnchor)
+        ])
+    }
+
+    private func setupDetailsButtonConstraints() {
+        NSLayoutConstraint.activate([
             detailsButton.trailingAnchor.constraint(
                 equalTo: gpaView.trailingAnchor,
                 constant: Constants.HomePageConstants.detailsButtonTrailingPadding
             ),
-            detailsButton.centerYAnchor.constraint(equalTo: gpaView.centerYAnchor),
-            
+            detailsButton.centerYAnchor.constraint(equalTo: gpaView.centerYAnchor)
+        ])
+    }
+
+    private func setupNextArrowConstraints() {
+        NSLayoutConstraint.activate([
             nextArrow.trailingAnchor.constraint(
                 equalTo: gpaView.trailingAnchor,
                 constant: Constants.HomePageConstants.nextArrowTrailingPadding

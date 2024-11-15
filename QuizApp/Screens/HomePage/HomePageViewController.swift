@@ -9,6 +9,8 @@ import UIKit
 
 final class HomePageViewController: UIViewController {
     
+    // MARK: - Properties
+    
     private let headerLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.HomePageConstants.helloText
@@ -54,17 +56,25 @@ final class HomePageViewController: UIViewController {
         return logOutButton
     }()
     
+    // MARK: - Lifecycle Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
     
+    // MARK: - Setup Methods
+    
     private func setupUI() {
-        view.backgroundColor = Constants.Colors.neutralWhite
-        navigationController?.isNavigationBarHidden = true
+        setupView()
         setupTableView()
         setUpHierarchy()
         setUpConstraints()
+    }
+    
+    private func setupView() {
+        view.backgroundColor = Constants.Colors.neutralWhite
+        navigationController?.isNavigationBarHidden = true
     }
     
     private func setUpHierarchy() {
@@ -79,67 +89,99 @@ final class HomePageViewController: UIViewController {
     }
     
     private func setUpConstraints() {
-        NSLayoutConstraint.activate(
-            [
-                headerLabel.topAnchor.constraint(
-                    equalTo: view.safeAreaLayoutGuide.topAnchor,
-                    constant: Constants.HomePageConstants.headerTopPadding
-                ),
-                headerLabel.leadingAnchor.constraint(
-                    equalTo: view.leadingAnchor,
-                    constant: Constants.HomePageConstants.horizontalPadding
-                ),
-                
-                gpaView.topAnchor.constraint(
-                    equalTo: headerLabel.bottomAnchor,
-                    constant: Constants.HomePageConstants.gpaViewTopPadding
-                ),
-                gpaView.leadingAnchor.constraint(
-                    equalTo: view.leadingAnchor,
-                    constant: Constants.HomePageConstants.horizontalPadding
-                ),
-                gpaView.trailingAnchor.constraint(
-                    equalTo: view.trailingAnchor,
-                    constant: -Constants.HomePageConstants.horizontalPadding
-                ),
-                subjectsLabel.topAnchor.constraint(
-                    equalTo: gpaView.bottomAnchor,
-                    constant: Constants.HomePageConstants.subjectsLabelTopPadding
-                ),
-                subjectsLabel.leadingAnchor.constraint(
-                    equalTo: view.leadingAnchor,
-                    constant: Constants.HomePageConstants.horizontalPadding
-                ),
-                
-                tableView.topAnchor.constraint(
-                    equalTo: subjectsLabel.bottomAnchor,
-                    constant: Constants.HomePageConstants.tableViewTopPadding
-                ),
-                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                tableView.bottomAnchor.constraint(equalTo: bottomSeparatorLine.topAnchor),
-                
-                bottomSeparatorLine.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                bottomSeparatorLine.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                bottomSeparatorLine.heightAnchor.constraint(
-                    equalToConstant: Constants.HomePageConstants.bottomSeparatorLine
-                ),
-                bottomSeparatorLine.bottomAnchor.constraint(
-                    equalTo: view.bottomAnchor,
-                    constant: Constants.HomePageConstants.bottomSeparatorLinePadding
-                ),
-                
-                logOutButton.leadingAnchor.constraint(
-                    equalTo: view.leadingAnchor,
-                    constant: Constants.HomePageConstants.logOutButtonLeadingPadding
-                ),
-                logOutButton.bottomAnchor.constraint(
-                    equalTo: view.bottomAnchor,
-                    constant: Constants.HomePageConstants.logoutButtonBottomPadding
-                )
-            ]
-        )
-     }
+        setupHeaderLabelConstraints()
+        setupGPAViewConstraints()
+        setupSubjectsLabelConstraints()
+        setupTableViewConstraints()
+        setupBottomSeparatorLineConstraints()
+        setupLogOutButtonConstraints()
+    }
+
+    // MARK: - Constraint Setup Methods
+    
+    private func setupHeaderLabelConstraints() {
+        NSLayoutConstraint.activate([
+            headerLabel.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: Constants.HomePageConstants.headerTopPadding
+            ),
+            headerLabel.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: Constants.HomePageConstants.horizontalPadding
+            )
+        ])
+    }
+
+    private func setupGPAViewConstraints() {
+        NSLayoutConstraint.activate([
+            gpaView.topAnchor.constraint(
+                equalTo: headerLabel.bottomAnchor,
+                constant: Constants.HomePageConstants.gpaViewTopPadding
+            ),
+            gpaView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: Constants.HomePageConstants.horizontalPadding
+            ),
+            gpaView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -Constants.HomePageConstants.horizontalPadding
+            )
+        ])
+    }
+
+    private func setupSubjectsLabelConstraints() {
+        NSLayoutConstraint.activate([
+            subjectsLabel.topAnchor.constraint(
+                equalTo: gpaView.bottomAnchor,
+                constant: Constants.HomePageConstants.subjectsLabelTopPadding
+            ),
+            subjectsLabel.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: Constants.HomePageConstants.horizontalPadding
+            )
+        ])
+    }
+
+    private func setupTableViewConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(
+                equalTo: subjectsLabel.bottomAnchor,
+                constant: Constants.HomePageConstants.tableViewTopPadding
+            ),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomSeparatorLine.topAnchor)
+        ])
+    }
+
+    private func setupBottomSeparatorLineConstraints() {
+        NSLayoutConstraint.activate([
+            bottomSeparatorLine.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomSeparatorLine.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomSeparatorLine.heightAnchor.constraint(
+                equalToConstant: Constants.HomePageConstants.bottomSeparatorLine
+            ),
+            bottomSeparatorLine.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: Constants.HomePageConstants.bottomSeparatorLinePadding
+            )
+        ])
+    }
+
+    private func setupLogOutButtonConstraints() {
+        NSLayoutConstraint.activate([
+            logOutButton.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: Constants.HomePageConstants.logOutButtonLeadingPadding
+            ),
+            logOutButton.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: Constants.HomePageConstants.logoutButtonBottomPadding
+            ),
+            logOutButton.widthAnchor.constraint(equalToConstant: Constants.HomePageConstants.logoutButtonWidth),
+            logOutButton.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.logoutButtonHeight)
+        ])
+    }
     
     private func setupTableView() {
         tableView.delegate = self
@@ -147,6 +189,8 @@ final class HomePageViewController: UIViewController {
         tableView.register(SubjectCell.self, forCellReuseIdentifier: SubjectCell.identifier)
     }
 }
+
+// MARK: - UITableViewDelegate & UITableViewDataSource
 
 extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

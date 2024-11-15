@@ -27,10 +27,10 @@ final class CustomRoundButton: UIButton {
         layer.cornerRadius = 22.5
         translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: 45),
-            heightAnchor.constraint(equalToConstant: 45)
-        ])
+//        NSLayoutConstraint.activate([
+//            widthAnchor.constraint(equalToConstant: 45),
+//            heightAnchor.constraint(equalToConstant: 45)
+//        ])
     }
     
     func configure(with image: UIImage?) {

@@ -92,10 +92,14 @@ struct Constants {
         static let nextArrowTrailingPadding: CGFloat = -34
         static let subjectsLabelTopPadding: CGFloat = 32
         static let tableViewTopPadding: CGFloat = 16
+        static let arrowButtonHeight: CGFloat = 45
+        static let arrowButtonWidth: CGFloat = 45
         static let bottomSeparatorLine: CGFloat = 1
         static let bottomSeparatorLinePadding: CGFloat = -65
         static let logOutButtonLeadingPadding: CGFloat = 317
         static let logoutButtonBottomPadding: CGFloat = -11
+        static let logoutButtonHeight: CGFloat = 43
+        static let logoutButtonWidth: CGFloat = 43
     
         //Text
         static let helloText = "გამარჯობა, ირაკლი"
