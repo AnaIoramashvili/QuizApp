@@ -37,7 +37,7 @@ final class HomePageViewController: UIViewController {
     private let gpaStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 4
+        stackView.spacing = Constants.HomePageConstants.gpaStackViewSpacing
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -92,6 +92,13 @@ final class HomePageViewController: UIViewController {
         return tableView
     }()
     
+    private let bottomSeparatorLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = Constants.Colors.neutralLighterGray2
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -119,7 +126,8 @@ final class HomePageViewController: UIViewController {
             detailsButton,
             nextArrow,
             subjectsLabel,
-            tableView
+            tableView,
+            bottomSeparatorLine
         )
     }
     
@@ -155,7 +163,12 @@ final class HomePageViewController: UIViewController {
              tableView.topAnchor.constraint(equalTo: subjectsLabel.bottomAnchor, constant: Constants.HomePageConstants.tableViewTopPadding),
              tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
              tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+             tableView.bottomAnchor.constraint(equalTo: bottomSeparatorLine.topAnchor),
+
+             bottomSeparatorLine.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+             bottomSeparatorLine.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+             bottomSeparatorLine.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.bottomSeparatorLine),
+             bottomSeparatorLine.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.HomePageConstants.bottomSeparatorLinePadding)
          ])
      }
     

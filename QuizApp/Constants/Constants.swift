@@ -28,6 +28,7 @@ struct Constants {
         static let neutralWhite: UIColor = .white
         static let neutralGrey = UIColor(hex: "#B3B3B3")
         static let neutralLighterGray = UIColor(hex: "#F6F6F6")
+        static let neutralLighterGray2 = UIColor(hex: "#F1F1F1")
         static let neutralDarkGrey = UIColor(hex: "#1D1D1D")
         static let yellowPrimary = UIColor(hex: "#FFC44A")
         static let blueSecondaryDefault = UIColor(hex: "#537FE7")
@@ -85,14 +86,14 @@ struct Constants {
         static let gpaViewTopPadding: CGFloat = 20
         static let gpaClearViewLeadingPadding: CGFloat = 18
         static let gpaStackViewPadding: CGFloat = 12
+        static let gpaStackViewSpacing: CGFloat = 4
         static let detailsButtonTrailingPadding: CGFloat = -48
         static let nextArrowTrailingPadding: CGFloat = -34
         static let subjectsLabelTopPadding: CGFloat = 32
         static let tableViewTopPadding: CGFloat = 16
-        
-        // Stack View
-        static let gpaStackViewSpacing: CGFloat = 4
-        
+        static let bottomSeparatorLine: CGFloat = 1
+        static let bottomSeparatorLinePadding: CGFloat = -65
+    
         //Text
         static let helloText = "გამარჯობა, ირაკლი"
         static let chooseSubject = "აირჩიე საგანი"
