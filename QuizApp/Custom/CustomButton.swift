@@ -27,7 +27,7 @@ class CustomButton: UIButton {
         setTitle(title, for: .normal)
         backgroundColor = Constants.Colors.buttonColor
         setTitleColor(Constants.Colors.neutralWhite, for: .normal)
-        titleLabel?.font = .systemFont(ofSize: Constants.FontSizes.buttonFontSize, weight: .semibold)
+        titleLabel?.font = .systemFont(ofSize: Constants.FontSizes.small, weight: .semibold)
         layer.cornerRadius = Constants.Layout.startButtonCornerRadius
         translatesAutoresizingMaskIntoConstraints = false
         setupHeightConstraint()
