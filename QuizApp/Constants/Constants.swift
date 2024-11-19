@@ -49,6 +49,7 @@ struct Constants {
         static let gpaViewCornerRadius: CGFloat = 26
         static let gpaClearViewCornerRadius: CGFloat = 14
         static let containerCornerRadius: CGFloat = 26
+        static let setupButtonCornerRadius: CGFloat = 22.5
         
         // Border Widths
         static let textFieldBorderWidth: CGFloat = 1
@@ -80,6 +81,8 @@ struct Constants {
         static let gpaClearViewHeight: CGFloat = 40
         static let nextArrowHeight: CGFloat = 10
         static let nextArrowWidth: CGFloat = 14
+        static let customRoundedButtonWidth: CGFloat = 20
+        static let customRoundedButtonHeight: CGFloat = 20
         
         // Spacing and Padding
         static let headerTopPadding: CGFloat = 8

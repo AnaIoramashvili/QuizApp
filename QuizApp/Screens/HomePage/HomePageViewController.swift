@@ -35,11 +35,14 @@ final class HomePageViewController: UIViewController {
         return label
     }()
     
-    private let tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SubjectCell.self, forCellReuseIdentifier: SubjectCell.identifier)
         return tableView
     }()
     
@@ -67,7 +70,6 @@ final class HomePageViewController: UIViewController {
     
     private func setupUI() {
         setupView()
-        setupTableView()
         setUpHierarchy()
         setUpConstraints()
     }
@@ -181,12 +183,6 @@ final class HomePageViewController: UIViewController {
             logOutButton.widthAnchor.constraint(equalToConstant: Constants.HomePageConstants.logoutButtonWidth),
             logOutButton.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.logoutButtonHeight)
         ])
-    }
-    
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(SubjectCell.self, forCellReuseIdentifier: SubjectCell.identifier)
     }
 }
 

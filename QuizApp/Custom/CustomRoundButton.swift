@@ -9,6 +9,8 @@ import UIKit
 
 final class CustomRoundButton: UIButton {
     
+    // MARK: - Initializers
+    
     convenience init() {
         self.init(frame: .zero)
     }
@@ -22,16 +24,15 @@ final class CustomRoundButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Private Methods
+    
     private func setupButton() {
         backgroundColor = Constants.Colors.yellowPrimary
-        layer.cornerRadius = 22.5
+        layer.cornerRadius = Constants.Layout.setupButtonCornerRadius
         translatesAutoresizingMaskIntoConstraints = false
-        
-//        NSLayoutConstraint.activate([
-//            widthAnchor.constraint(equalToConstant: 45),
-//            heightAnchor.constraint(equalToConstant: 45)
-//        ])
     }
+    
+    // MARK: - Public Methods
     
     func configure(with image: UIImage?) {
         setImage(image?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -41,8 +42,8 @@ final class CustomRoundButton: UIButton {
         imageView?.translatesAutoresizingMaskIntoConstraints = false
         if let imageView = imageView {
             NSLayoutConstraint.activate([
-                imageView.widthAnchor.constraint(equalToConstant: 20),
-                imageView.heightAnchor.constraint(equalToConstant: 20),
+                imageView.widthAnchor.constraint(equalToConstant: Constants.HomePageConstants.customRoundedButtonWidth),
+                imageView.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.customRoundedButtonHeight),
                 imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
                 imageView.centerYAnchor.constraint(equalTo: centerYAnchor)
             ])
