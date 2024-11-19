@@ -20,7 +20,6 @@
 		5994AF532CEC86AE006B4B2C /* CustomPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF522CEC86AE006B4B2C /* CustomPopUp.swift */; };
 		5994AF552CEC8914006B4B2C /* ScorePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF542CEC8914006B4B2C /* ScorePopUp.swift */; };
 		5994AF572CEC8937006B4B2C /* PopupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF562CEC8937006B4B2C /* PopupButton.swift */; };
-		5994AF592CEC9646006B4B2C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF582CEC9646006B4B2C /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +38,6 @@
 		5994AF522CEC86AE006B4B2C /* CustomPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUp.swift; sourceTree = "<group>"; };
 		5994AF542CEC8914006B4B2C /* ScorePopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePopUp.swift; sourceTree = "<group>"; };
 		5994AF562CEC8937006B4B2C /* PopupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupButton.swift; sourceTree = "<group>"; };
-		5994AF582CEC9646006B4B2C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				59202CAD2CE374730008BD59 /* StartPageViewController.swift */,
-				5994AF582CEC9646006B4B2C /* ViewController.swift */,
 			);
 			path = StartPage;
 			sourceTree = "<group>";
@@ -223,7 +220,6 @@
 				59202CAA2CE374730008BD59 /* AppDelegate.swift in Sources */,
 				59202CAC2CE374730008BD59 /* SceneDelegate.swift in Sources */,
 				5938F8182CE4D6D300B56916 /* CustomButton.swift in Sources */,
-				5994AF592CEC9646006B4B2C /* ViewController.swift in Sources */,
 				5994AF552CEC8914006B4B2C /* ScorePopUp.swift in Sources */,
 				5994AF572CEC8937006B4B2C /* PopupButton.swift in Sources */,
 				59202CC32CE3A8A30008BD59 /* Constants.swift in Sources */,
