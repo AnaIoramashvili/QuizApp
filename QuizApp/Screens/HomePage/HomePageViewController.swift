@@ -63,12 +63,12 @@ final class HomePageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        setUp()
     }
     
     // MARK: - Setup Methods
     
-    private func setupUI() {
+    private func setUp() {
         setupView()
         setUpHierarchy()
         setUpConstraints()

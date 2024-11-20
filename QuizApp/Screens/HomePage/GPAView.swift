@@ -29,7 +29,6 @@ final class GPAView: UIView {
     
     private let gpaStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
         stackView.spacing = Constants.HomePageConstants.gpaStackViewSpacing
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false

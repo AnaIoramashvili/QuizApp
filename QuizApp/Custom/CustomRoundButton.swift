@@ -32,21 +32,23 @@ final class CustomRoundButton: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
     }
     
+    private func setupImageViewConstraints() {
+        guard let imageView = imageView else { return }
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageView.widthAnchor.constraint(equalToConstant: Constants.HomePageConstants.customRoundedButtonWidth),
+            imageView.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.customRoundedButtonHeight),
+            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+    }
+    
     // MARK: - Public Methods
     
     func configure(with image: UIImage?) {
         setImage(image?.withRenderingMode(.alwaysTemplate), for: .normal)
         imageView?.contentMode = .scaleAspectFit
         tintColor = .white
-        
-        imageView?.translatesAutoresizingMaskIntoConstraints = false
-        if let imageView = imageView {
-            NSLayoutConstraint.activate([
-                imageView.widthAnchor.constraint(equalToConstant: Constants.HomePageConstants.customRoundedButtonWidth),
-                imageView.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.customRoundedButtonHeight),
-                imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-                imageView.centerYAnchor.constraint(equalTo: centerYAnchor)
-            ])
-        }
+        setupImageViewConstraints()
     }
 }

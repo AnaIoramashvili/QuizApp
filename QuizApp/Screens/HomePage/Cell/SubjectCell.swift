@@ -26,7 +26,6 @@ final class SubjectCell: UITableViewCell {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -72,7 +71,7 @@ final class SubjectCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
+        setUp()
     }
     
     required init?(coder: NSCoder) {
@@ -81,11 +80,15 @@ final class SubjectCell: UITableViewCell {
     
     // MARK: - Setup Methods
     
+    private func setUp() {
+        setUpHierarchy()
+        setUpConstraints()
+        setupUI()
+    }
+    
     private func setupUI() {
         backgroundColor = .clear
         selectionStyle = .none
-        setUpHierarchy()
-        setUpConstraints()
     }
     
     private func setUpHierarchy() {
