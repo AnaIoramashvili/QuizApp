@@ -13,7 +13,6 @@ final class CustomPopUp: UIView {
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.alignment = .fill
         stackView.spacing = Constants.Sizing.stackViewSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -30,7 +29,6 @@ final class CustomPopUp: UIView {
 
     private let buttonsStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.spacing = Constants.Sizing.buttonsSpacing
         stackView.distribution = .fillEqually
