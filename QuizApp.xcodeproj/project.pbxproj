@@ -20,6 +20,11 @@
 		5994AF532CEC86AE006B4B2C /* CustomPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF522CEC86AE006B4B2C /* CustomPopUp.swift */; };
 		5994AF552CEC8914006B4B2C /* ScorePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF542CEC8914006B4B2C /* ScorePopUp.swift */; };
 		5994AF572CEC8937006B4B2C /* PopupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF562CEC8937006B4B2C /* PopupButton.swift */; };
+		5938F81F2CE6251E00B56916 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938F81E2CE6251E00B56916 /* HomePageViewController.swift */; };
+		5938F8212CE62B6500B56916 /* SubjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938F8202CE62B6500B56916 /* SubjectCell.swift */; };
+		5938F8232CE62F9300B56916 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938F8222CE62F9300B56916 /* Subject.swift */; };
+		5938F8272CE63A7C00B56916 /* CustomRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5938F8262CE63A7C00B56916 /* CustomRoundButton.swift */; };
+		5994AF512CE77939006B4B2C /* GPAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF502CE77939006B4B2C /* GPAView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +43,11 @@
 		5994AF522CEC86AE006B4B2C /* CustomPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUp.swift; sourceTree = "<group>"; };
 		5994AF542CEC8914006B4B2C /* ScorePopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePopUp.swift; sourceTree = "<group>"; };
 		5994AF562CEC8937006B4B2C /* PopupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupButton.swift; sourceTree = "<group>"; };
+		5938F81E2CE6251E00B56916 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		5938F8202CE62B6500B56916 /* SubjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCell.swift; sourceTree = "<group>"; };
+		5938F8222CE62F9300B56916 /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
+		5938F8262CE63A7C00B56916 /* CustomRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundButton.swift; sourceTree = "<group>"; };
+		5994AF502CE77939006B4B2C /* GPAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPAView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +102,7 @@
 		59202CBE2CE381A80008BD59 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				5938F81D2CE624E700B56916 /* HomePage */,
 				59202CC02CE3A7EF0008BD59 /* StartPage */,
 			);
 			path = Screens;
@@ -140,8 +151,36 @@
 				5994AF542CEC8914006B4B2C /* ScorePopUp.swift */,
 				5994AF562CEC8937006B4B2C /* PopupButton.swift */,
 				5938F8172CE4D6D300B56916 /* CustomButton.swift */,
+				5938F8262CE63A7C00B56916 /* CustomRoundButton.swift */,
 			);
 			path = Custom;
+			sourceTree = "<group>";
+		};
+		5938F81D2CE624E700B56916 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				5938F81E2CE6251E00B56916 /* HomePageViewController.swift */,
+				5994AF502CE77939006B4B2C /* GPAView.swift */,
+				5938F8242CE6397C00B56916 /* Model */,
+				5938F8252CE6398400B56916 /* Cell */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		5938F8242CE6397C00B56916 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5938F8222CE62F9300B56916 /* Subject.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5938F8252CE6398400B56916 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5938F8202CE62B6500B56916 /* SubjectCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,13 +254,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				59202CC62CE3AA750008BD59 /* UIViewExtension.swift in Sources */,
+				5938F8232CE62F9300B56916 /* Subject.swift in Sources */,
 				5938F81A2CE4E3C600B56916 /* UIStackViewExtension.swift in Sources */,
+				5938F81F2CE6251E00B56916 /* HomePageViewController.swift in Sources */,
 				59202CAE2CE374730008BD59 /* StartPageViewController.swift in Sources */,
 				59202CAA2CE374730008BD59 /* AppDelegate.swift in Sources */,
+				5938F8212CE62B6500B56916 /* SubjectCell.swift in Sources */,
 				59202CAC2CE374730008BD59 /* SceneDelegate.swift in Sources */,
 				5938F8182CE4D6D300B56916 /* CustomButton.swift in Sources */,
 				5994AF552CEC8914006B4B2C /* ScorePopUp.swift in Sources */,
 				5994AF572CEC8937006B4B2C /* PopupButton.swift in Sources */,
+				5938F8272CE63A7C00B56916 /* CustomRoundButton.swift in Sources */,
+				5994AF512CE77939006B4B2C /* GPAView.swift in Sources */,
 				59202CC32CE3A8A30008BD59 /* Constants.swift in Sources */,
 				5994AF532CEC86AE006B4B2C /* CustomPopUp.swift in Sources */,
 				5938F8152CE4D6B800B56916 /* UIColorExtension.swift in Sources */,
