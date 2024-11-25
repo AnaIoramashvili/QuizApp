@@ -18,20 +18,12 @@ final class ScorePopUp: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-
-    private let emojiLabel: UILabel = {
+    
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = Constants.Texts.emoji
+        label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: Constants.FontSizes.big)
-        return label
-    }()
-
-    private let congratsLabel: UILabel = {
-        let label = UILabel()
-        label.text = Constants.Texts.message
-        label.font = .systemFont(ofSize: Constants.FontSizes.medium, weight: .bold)
-        label.textColor = Constants.Colors.neutralWhite
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
@@ -73,6 +65,7 @@ final class ScorePopUp: UIView {
         setupViewHierarchy()
         setConstraints()
         setCustomSpacings()
+        setTitle()
     }
 
     private func setupView() {
@@ -85,13 +78,36 @@ final class ScorePopUp: UIView {
     private func setupViewHierarchy() {
         addSubviews(stackView, closeButton)
         stackView.addArrangedSubviews(
-            emojiLabel,
-            congratsLabel,
+            titleLabel,
             pointsLabel,
             separatorView
         )
     }
-
+    
+    // MARK: - Set Up Title
+    private func setTitle() {
+        let emoji = Constants.Texts.emoji
+        let message = Constants.Texts.message
+        
+        let emojiAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: Constants.FontSizes.big)
+        ]
+        
+        let messageAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: Constants.FontSizes.medium, weight: .bold),
+            .foregroundColor: Constants.Colors.neutralWhite
+        ]
+        
+        let emojiAttributedString = NSAttributedString(string: emoji, attributes: emojiAttributes)
+        let messageAttributedString = NSAttributedString(string: "\n\(message)", attributes: messageAttributes)
+        
+        let combinedAttributedString = NSMutableAttributedString()
+        combinedAttributedString.append(emojiAttributedString)
+        combinedAttributedString.append(messageAttributedString)
+        
+        titleLabel.attributedText = combinedAttributedString
+    }
+    
     // MARK: - Constraints
     private func setConstraints() {
         configureMainStackViewConstraints()
@@ -141,9 +157,12 @@ final class ScorePopUp: UIView {
 
     // MARK: - View Configure
     func configure(points: Int) {
-        pointsLabel.text = "შენ დააგროვე \(points) ქულა"
+        pointsLabel.text = String(
+            format: Constants.Texts.pointsMessage,
+            points
+        )
     }
-
+    
     // MARK: - Actions
     
     var closeAction: (() -> Void)?
@@ -173,6 +192,7 @@ extension ScorePopUp {
             static let emoji = "🎉"
             static let message = "გილოცავ!"
             static let closeButtonTitle = "დახურვა"
+            static let pointsMessage = "შენ დააგროვე %d ქულა"
         }
 
         enum FontSizes {
