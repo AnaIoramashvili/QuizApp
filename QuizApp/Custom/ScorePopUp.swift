@@ -164,7 +164,6 @@ final class ScorePopUp: UIView {
     }
     
     // MARK: - Actions
-    
     var closeAction: (() -> Void)?
 
     @objc func closeClicked() {
@@ -185,7 +184,6 @@ extension ScorePopUp {
             static let closeButtonHeightAnchor: CGFloat = 44
             static let stackViewTopPadding: CGFloat = 39
             static let stackViewBottomPadding: CGFloat = -34
-
         }
 
         enum Texts {
