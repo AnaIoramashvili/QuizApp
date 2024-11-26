@@ -24,7 +24,6 @@ final class AnswerCell: UITableViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
         label.font = .systemFont(ofSize: Constants.FontSizes.medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -43,8 +42,7 @@ final class AnswerCell: UITableViewCell {
     
     private let starImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: Constants.QuizProgressViewConstants.starImage)
-        imageView.tintColor = Constants.Colors.neutralWhite
+        imageView.image = UIImage(named: Constants.AnswerCellConstants.whiteStarImage)
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true
@@ -75,9 +73,11 @@ final class AnswerCell: UITableViewCell {
     
     private func setUpHierarchy() {
         contentView.addSubview(containerView)
-        containerView.addSubview(titleLabel)
-        containerView.addSubview(scoreLabel)
-        containerView.addSubview(starImageView)
+        containerView.addSubviews(
+        titleLabel,
+        scoreLabel,
+        starImageView
+        )
     }
     
     private func setUpConstraints() {

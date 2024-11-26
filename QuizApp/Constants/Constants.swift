@@ -182,6 +182,7 @@ struct Constants {
         static let starImageHeight: CGFloat = 12
         static let scoreLabel = "+1"
         static let scoreLabelPadding: CGFloat = -2
+        static let whiteStarImage = "white_star"
         
         static let success = UIColor(hex: "#4BB543")
         static let wrong = UIColor(hex: "#DB1D2A")
