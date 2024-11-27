@@ -74,9 +74,9 @@ final class AnswerCell: UITableViewCell {
     private func setUpHierarchy() {
         contentView.addSubview(containerView)
         containerView.addSubviews(
-        titleLabel,
-        scoreLabel,
-        starImageView
+            titleLabel,
+            scoreLabel,
+            starImageView
         )
     }
     
@@ -103,7 +103,7 @@ final class AnswerCell: UITableViewCell {
             containerView.heightAnchor.constraint(equalToConstant: Constants.AnswerCellConstants.containerHeight)
         ])
     }
-
+    
     private func setupTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(
@@ -144,15 +144,33 @@ final class AnswerCell: UITableViewCell {
         titleLabel.text = title
     }
     
-    // MARK: - Color changing Success/Wrong
+    // MARK: - Color Changing Success/Wrong
     func updateState(isCorrect: Bool) {
-        containerView.backgroundColor = isCorrect ? Constants.AnswerCellConstants.success : Constants.AnswerCellConstants.wrong
+        if isCorrect {
+            // Correct answer
+            containerView.backgroundColor = Constants.AnswerCellConstants.success
+            titleLabel.textColor = Constants.Colors.neutralWhite
+            scoreLabel.isHidden = false
+            starImageView.isHidden = false
+        } else {
+            // Wrong answer
+            containerView.backgroundColor = Constants.AnswerCellConstants.wrong
+            titleLabel.textColor = Constants.Colors.neutralWhite
+            scoreLabel.isHidden = true
+            starImageView.isHidden = true
+        }
+    }
+    
+    func markAsCorrect() {
+        // Show correct answer cell styling without +1 or star
+        containerView.backgroundColor = Constants.AnswerCellConstants.success
         titleLabel.textColor = Constants.Colors.neutralWhite
-        scoreLabel.isHidden = !isCorrect
-        starImageView.isHidden = !isCorrect
+        scoreLabel.isHidden = true
+        starImageView.isHidden = true
     }
     
     func resetState() {
+        // Reset cell to default state
         containerView.backgroundColor = Constants.Colors.neutralLighterGray
         titleLabel.textColor = Constants.Colors.neutralDarkGrey
         scoreLabel.isHidden = true

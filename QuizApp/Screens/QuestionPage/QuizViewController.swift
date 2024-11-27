@@ -173,12 +173,19 @@ extension QuizViewController: UITableViewDataSource {
         
         cell.configure(with: answers[indexPath.row])
         
-        if let selectedIndex = selectedAnswerIndex, selectedIndex == indexPath.row {
-            let isCorrect = indexPath.row == correctAnswerIndex
-            cell.updateState(isCorrect: isCorrect)
+        if let selectedIndex = selectedAnswerIndex {
+            if selectedIndex == indexPath.row {
+                let isCorrect = selectedIndex == correctAnswerIndex
+                cell.updateState(isCorrect: isCorrect)
+            } else if indexPath.row == correctAnswerIndex {
+                cell.markAsCorrect()
+            } else {
+                cell.resetState()
+            }
         } else {
             cell.resetState()
         }
+        
         return cell
     }
     
@@ -190,7 +197,21 @@ extension QuizViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension QuizViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard selectedAnswerIndex == nil else { return }
+        
         selectedAnswerIndex = indexPath.row
-        tableView.reloadData()
+        let isCorrect = indexPath.row == correctAnswerIndex
+        
+        if let selectedCell = tableView.cellForRow(at: indexPath) as? AnswerCell {
+            selectedCell.updateState(isCorrect: isCorrect)
+        }
+        
+        if !isCorrect {
+            let correctIndexPath = IndexPath(row: correctAnswerIndex, section: 0)
+            if let correctCell = tableView.cellForRow(at: correctIndexPath) as? AnswerCell {
+                correctCell.markAsCorrect()
+            }
+        }
+        tableView.allowsSelection = false
     }
 }

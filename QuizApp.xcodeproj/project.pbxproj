@@ -197,13 +197,29 @@
 		5994AF5E2CF5C4BC006B4B2C /* QuestionPage */ = {
 			isa = PBXGroup;
 			children = (
+				5994AF632CF5C6AA006B4B2C /* QuizViewController.swift */,
+				5994AF6A2CF6F4D3006B4B2C /* Views */,
+				5994AF692CF6F48E006B4B2C /* Cell */,
+			);
+			path = QuestionPage;
+			sourceTree = "<group>";
+		};
+		5994AF692CF6F48E006B4B2C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5994AF672CF5D114006B4B2C /* AnswerCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		5994AF6A2CF6F4D3006B4B2C /* Views */ = {
+			isa = PBXGroup;
+			children = (
 				5994AF652CF5D05F006B4B2C /* QuizHeaderView.swift */,
 				5994AF5F2CF5C4E5006B4B2C /* QuizProgressView.swift */,
 				5994AF612CF5C5A3006B4B2C /* QuizQuestionView.swift */,
-				5994AF632CF5C6AA006B4B2C /* QuizViewController.swift */,
-				5994AF672CF5D114006B4B2C /* AnswerCell.swift */,
 			);
-			path = QuestionPage;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
