@@ -24,7 +24,6 @@ final class QuizViewController: UIViewController {
             forCellReuseIdentifier: AnswerCell.identifier
         )
         tableView.separatorStyle = .none
-        tableView.isScrollEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()

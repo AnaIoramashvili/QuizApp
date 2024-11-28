@@ -31,24 +31,13 @@ final class AnswerCell: UITableViewCell {
     
     private let scoreLabel: UILabel = {
         let label = UILabel()
-        label.text = Constants.AnswerCellConstants.scoreLabel
+        label.attributedText = .createScoreText()
         label.textAlignment = .right
-        label.font = .systemFont(ofSize: Constants.FontSizes.small14, weight: .semibold)
-        label.textColor = Constants.Colors.neutralWhite
         label.translatesAutoresizingMaskIntoConstraints = false
         label.isHidden = true
         return label
     }()
-    
-    private let starImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: Constants.AnswerCellConstants.whiteStarImage)
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.isHidden = true
-        return imageView
-    }()
-    
+        
     // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -75,8 +64,7 @@ final class AnswerCell: UITableViewCell {
         contentView.addSubview(containerView)
         containerView.addSubviews(
             titleLabel,
-            scoreLabel,
-            starImageView
+            scoreLabel
         )
     }
     
@@ -84,7 +72,6 @@ final class AnswerCell: UITableViewCell {
         setupContainerViewConstraints()
         setupTitleLabelConstraints()
         setupScoreLabelConstraints()
-        setupStarImageViewConstraints()
     }
     
     // MARK: - Constraint Setup Methods
@@ -103,6 +90,16 @@ final class AnswerCell: UITableViewCell {
             containerView.heightAnchor.constraint(equalToConstant: Constants.AnswerCellConstants.containerHeight)
         ])
     }
+
+    private func setupScoreLabelConstraints() {
+        NSLayoutConstraint.activate([
+            scoreLabel.trailingAnchor.constraint(
+                equalTo: containerView.trailingAnchor,
+                constant: -Constants.AnswerCellConstants.titleLabelHorizontalPadding
+            ),
+            scoreLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+        ])
+    }
     
     private func setupTitleLabelConstraints() {
         NSLayoutConstraint.activate([
@@ -117,28 +114,6 @@ final class AnswerCell: UITableViewCell {
             titleLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
         ])
     }
-    
-    private func setupScoreLabelConstraints() {
-        NSLayoutConstraint.activate([
-            scoreLabel.trailingAnchor.constraint(
-                equalTo: starImageView.leadingAnchor,
-                constant: Constants.AnswerCellConstants.scoreLabelPadding
-            ),
-            scoreLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
-        ])
-    }
-    
-    private func setupStarImageViewConstraints() {
-        NSLayoutConstraint.activate([
-            starImageView.trailingAnchor.constraint(
-                equalTo: containerView.trailingAnchor,
-                constant: -Constants.AnswerCellConstants.titleLabelHorizontalPadding
-            ),
-            starImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            starImageView.heightAnchor.constraint(equalToConstant: Constants.AnswerCellConstants.starImageHeight)
-        ])
-    }
-    
     // MARK: - Configuration
     func configure(with title: String) {
         titleLabel.text = title
@@ -147,33 +122,46 @@ final class AnswerCell: UITableViewCell {
     // MARK: - Color Changing Success/Wrong
     func updateState(isCorrect: Bool) {
         if isCorrect {
-            // Correct answer
             containerView.backgroundColor = Constants.AnswerCellConstants.success
             titleLabel.textColor = Constants.Colors.neutralWhite
             scoreLabel.isHidden = false
-            starImageView.isHidden = false
         } else {
-            // Wrong answer
             containerView.backgroundColor = Constants.AnswerCellConstants.wrong
             titleLabel.textColor = Constants.Colors.neutralWhite
             scoreLabel.isHidden = true
-            starImageView.isHidden = true
         }
     }
     
     func markAsCorrect() {
-        // Show correct answer cell styling without +1 or star
         containerView.backgroundColor = Constants.AnswerCellConstants.success
         titleLabel.textColor = Constants.Colors.neutralWhite
         scoreLabel.isHidden = true
-        starImageView.isHidden = true
     }
     
     func resetState() {
-        // Reset cell to default state
         containerView.backgroundColor = Constants.Colors.neutralLighterGray
         titleLabel.textColor = Constants.Colors.neutralDarkGrey
         scoreLabel.isHidden = true
-        starImageView.isHidden = true
+    }
+}
+
+extension NSAttributedString {
+    static func createScoreText() -> NSAttributedString {
+        let attributedString = NSMutableAttributedString()
+        
+        let scoreAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: Constants.FontSizes.small14, weight: .semibold),
+            .foregroundColor: Constants.Colors.neutralWhite
+        ]
+        
+        let starAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: Constants.FontSizes.small14, weight: .semibold),
+            .foregroundColor: Constants.Colors.neutralWhite
+        ]
+        
+        attributedString.append(NSAttributedString(string: "+1 ", attributes: scoreAttributes))
+        attributedString.append(NSAttributedString(string: "★", attributes: starAttributes))
+        
+        return attributedString
     }
 }

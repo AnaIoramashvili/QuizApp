@@ -35,24 +35,17 @@ final class QuizProgressView: UIView {
         return label
     }()
     
-    private let pointsValueLabel: UILabel = {
+    private let pointsLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: Constants.FontSizes.small14, weight: .medium)
         label.textColor = Constants.Colors.yellowPrimary
         return label
     }()
     
-    private let starImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: Constants.QuizProgressViewConstants.starImage)
-        imageView.tintColor = Constants.Colors.yellowPrimary
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
     private lazy var pointsStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [pointsTitleLabel, pointsValueLabel, starImageView])
+        let stack = UIStackView(arrangedSubviews: [pointsTitleLabel, pointsLabel])
         stack.alignment = .center
+        stack.spacing = Constants.QuizProgressViewConstants.pointsStackSpacing
         return stack
     }()
     
@@ -69,7 +62,7 @@ final class QuizProgressView: UIView {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    
+
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -100,7 +93,6 @@ final class QuizProgressView: UIView {
     private func setConstraints() {
         mainStackViewConstraints()
         progressBarConstraints()
-        starImageConstraints()
     }
     
     private func mainStackViewConstraints() {
@@ -118,12 +110,6 @@ final class QuizProgressView: UIView {
         ])
     }
     
-    private func starImageConstraints() {
-        NSLayoutConstraint.activate([
-            starImageView.heightAnchor.constraint(equalToConstant: Constants.QuizProgressViewConstants.starImageHeight)
-        ])
-    }
-    
     // MARK: - Public Methods
     func updateProgress(currentQuestion: Int, totalQuestions: Int) {
         questionCountLabel.text = "\(currentQuestion)/\(totalQuestions)"
@@ -132,6 +118,28 @@ final class QuizProgressView: UIView {
     }
     
     func updatePoints(points: Int) {
-        pointsValueLabel.text = "\(points)"
+        pointsLabel.attributedText = .createPointsText(points: points)
+    }
+}
+
+// MARK: - Attributed String
+extension NSAttributedString {
+    static func createPointsText(points: Int) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString()
+        
+        let pointsAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: Constants.FontSizes.small14, weight: .medium),
+            .foregroundColor: Constants.Colors.yellowPrimary
+        ]
+        
+        let starAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: Constants.FontSizes.small14, weight: .medium),
+            .foregroundColor: Constants.Colors.yellowPrimary
+        ]
+        
+        attributedString.append(NSAttributedString(string: "\(points) ", attributes: pointsAttributes))
+        attributedString.append(NSAttributedString(string: "★", attributes: starAttributes))
+        
+        return attributedString
     }
 }
