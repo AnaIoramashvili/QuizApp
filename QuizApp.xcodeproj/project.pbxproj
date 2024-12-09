@@ -27,6 +27,11 @@
 		5994AF572CEC8937006B4B2C /* PopupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF562CEC8937006B4B2C /* PopupButton.swift */; };
 		5994AF7C2CF85333006B4B2C /* ScorePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF7B2CF85333006B4B2C /* ScorePageViewController.swift */; };
 		5994AF7E2CF8970A006B4B2C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF7D2CF8970A006B4B2C /* Extension.swift */; };
+		5994AF602CF5C4E5006B4B2C /* QuizProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF5F2CF5C4E5006B4B2C /* QuizProgressView.swift */; };
+		5994AF622CF5C5A3006B4B2C /* QuizQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF612CF5C5A3006B4B2C /* QuizQuestionView.swift */; };
+		5994AF642CF5C6AA006B4B2C /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF632CF5C6AA006B4B2C /* QuizViewController.swift */; };
+		5994AF662CF5D05F006B4B2C /* QuizHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF652CF5D05F006B4B2C /* QuizHeaderView.swift */; };
+		5994AF682CF5D114006B4B2C /* AnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF672CF5D114006B4B2C /* AnswerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +57,11 @@
 		5994AF562CEC8937006B4B2C /* PopupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupButton.swift; sourceTree = "<group>"; };
 		5994AF7B2CF85333006B4B2C /* ScorePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePageViewController.swift; sourceTree = "<group>"; };
 		5994AF7D2CF8970A006B4B2C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		5994AF5F2CF5C4E5006B4B2C /* QuizProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizProgressView.swift; sourceTree = "<group>"; };
+		5994AF612CF5C5A3006B4B2C /* QuizQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestionView.swift; sourceTree = "<group>"; };
+		5994AF632CF5C6AA006B4B2C /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		5994AF652CF5D05F006B4B2C /* QuizHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHeaderView.swift; sourceTree = "<group>"; };
+		5994AF672CF5D114006B4B2C /* AnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +116,7 @@
 		59202CBE2CE381A80008BD59 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				5994AF5E2CF5C4BC006B4B2C /* QuestionPage */,
 				5938F81D2CE624E700B56916 /* HomePage */,
 				59202CC02CE3A7EF0008BD59 /* StartPage */,
 				5994AF7A2CF852FA006B4B2C /* ScorePage */,
@@ -195,6 +206,32 @@
 				5994AF7D2CF8970A006B4B2C /* Extension.swift */,
 			);
 			path = ScorePage;
+		5994AF5E2CF5C4BC006B4B2C /* QuestionPage */ = {
+			isa = PBXGroup;
+			children = (
+				5994AF632CF5C6AA006B4B2C /* QuizViewController.swift */,
+				5994AF6A2CF6F4D3006B4B2C /* Views */,
+				5994AF692CF6F48E006B4B2C /* Cell */,
+			);
+			path = QuestionPage;
+			sourceTree = "<group>";
+		};
+		5994AF692CF6F48E006B4B2C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5994AF672CF5D114006B4B2C /* AnswerCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		5994AF6A2CF6F4D3006B4B2C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5994AF652CF5D05F006B4B2C /* QuizHeaderView.swift */,
+				5994AF5F2CF5C4E5006B4B2C /* QuizProgressView.swift */,
+				5994AF612CF5C5A3006B4B2C /* QuizQuestionView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,17 +309,22 @@
 				5938F8232CE62F9300B56916 /* Subject.swift in Sources */,
 				5938F81A2CE4E3C600B56916 /* UIStackViewExtension.swift in Sources */,
 				5938F81F2CE6251E00B56916 /* HomePageViewController.swift in Sources */,
+				5994AF662CF5D05F006B4B2C /* QuizHeaderView.swift in Sources */,
 				59202CAE2CE374730008BD59 /* StartPageViewController.swift in Sources */,
 				59202CAA2CE374730008BD59 /* AppDelegate.swift in Sources */,
 				5938F8212CE62B6500B56916 /* SubjectCell.swift in Sources */,
 				59202CAC2CE374730008BD59 /* SceneDelegate.swift in Sources */,
+				5994AF642CF5C6AA006B4B2C /* QuizViewController.swift in Sources */,
 				5938F8182CE4D6D300B56916 /* CustomButton.swift in Sources */,
+				5994AF602CF5C4E5006B4B2C /* QuizProgressView.swift in Sources */,
 				5994AF552CEC8914006B4B2C /* ScorePopUp.swift in Sources */,
+				5994AF622CF5C5A3006B4B2C /* QuizQuestionView.swift in Sources */,
 				5994AF572CEC8937006B4B2C /* PopupButton.swift in Sources */,
 				5938F8272CE63A7C00B56916 /* CustomRoundButton.swift in Sources */,
 				5994AF512CE77939006B4B2C /* GPAView.swift in Sources */,
 				59202CC32CE3A8A30008BD59 /* Constants.swift in Sources */,
 				5994AF7E2CF8970A006B4B2C /* Extension.swift in Sources */,
+				5994AF682CF5D114006B4B2C /* AnswerCell.swift in Sources */,
 				5994AF532CEC86AE006B4B2C /* CustomPopUp.swift in Sources */,
 				5938F8152CE4D6B800B56916 /* UIColorExtension.swift in Sources */,
 			);

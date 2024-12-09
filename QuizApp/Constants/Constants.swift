@@ -34,10 +34,12 @@ struct Constants {
         static let yellowPrimary = UIColor(hex: "#FFC44A")
         static let blueSecondaryDefault = UIColor(hex: "#537FE7")
         static let blueSecondaryLighter = UIColor(hex: "#6B91EA")
+        static let blueSecondaryLightest = UIColor(hex: "#C0D0F6")
     }
     
     struct FontSizes {
         static let small: CGFloat = 12
+        static let small14: CGFloat = 14
         static let medium: CGFloat = 16
         static let big: CGFloat = 20
     }
@@ -127,6 +129,63 @@ struct Constants {
         static let labelLeadingPadding: CGFloat = 12
         static let descriptionTopPadding: CGFloat = 2
         static let arrowTrailingPadding: CGFloat = -26
+    }
+    
+    struct QuizHeaderViewConstants {
+        static let closeButtonImage = "close"
+        static let closeButtonHeight: CGFloat = 16
+        static let closeButtonWidth: CGFloat = 16
+        static let leadingSpacerView: CGFloat = 24
+    }
+    
+    struct QuizProgressViewConstants {
+        static let radius: CGFloat = 4
+        static let progressBarHeight: CGFloat = 9
+        static let pointsStackSpacing: CGFloat = 4
+        static let mainStackSpacing: CGFloat = 8
+        static let starImageHeight: CGFloat = 8
+        static let starImage = "star"
+        static let currentScore = "მიმდინარე ქულა:"
+    }
+    
+    struct QuizQuestionViewConstants {
+        static let radius: CGFloat = 26
+        static let height: CGFloat = 103
+        static let sidePadding: CGFloat = 56
+        static let numberOfLines: Int = 0
+        static let questionViewHeight = 35
+    }
+    
+    struct QuizViewControllerConstants {
+        static let identifier = "AnswerCell"
+        static let answerCellHeight: CGFloat = 72
+        static let nextButtonRadius: CGFloat = 22
+        static let nextButtonTitle = "შემდეგი"
+        static let nextButtonHeight: CGFloat = 56
+        
+        static let mainStackViewSpacing: CGFloat = 24
+        static let mainStackViewTopPadding: CGFloat = 8
+        static let mainStackViewHorizontalPadding: CGFloat = 16
+        static let answersTableViewTopPadding: CGFloat = 58
+        static let answersTableViewHorizontalPadding: CGFloat = 16
+        static let answersTableViewHeight: CGFloat = 300
+        static let nextButtonTopPadding: CGFloat = 63
+        static let nextButtonHorizontalPadding: CGFloat = 16
+        static let heightForRow: CGFloat = 72
+    }
+    
+    struct AnswerCellConstants {
+        static let containerCornerRadius: CGFloat = 22
+        static let containerVerticalPadding: CGFloat = 6
+        static let containerHeight: CGFloat = 60
+        static let titleLabelHorizontalPadding: CGFloat = 16
+        static let starImageHeight: CGFloat = 12
+        static let scoreLabel = "+1"
+        static let scoreLabelPadding: CGFloat = -2
+        static let whiteStarImage = "white_star"
+        
+        static let success = UIColor(hex: "#4BB543")
+        static let wrong = UIColor(hex: "#DB1D2A")
     }
 }
 
