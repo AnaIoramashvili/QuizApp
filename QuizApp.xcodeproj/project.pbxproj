@@ -30,6 +30,8 @@
 		5994AF642CF5C6AA006B4B2C /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF632CF5C6AA006B4B2C /* QuizViewController.swift */; };
 		5994AF662CF5D05F006B4B2C /* QuizHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF652CF5D05F006B4B2C /* QuizHeaderView.swift */; };
 		5994AF682CF5D114006B4B2C /* AnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF672CF5D114006B4B2C /* AnswerCell.swift */; };
+		9100BF712D09EE4300983448 /* ScorePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9100BF702D09EE4300983448 /* ScorePageViewController.swift */; };
+		9100BF732D09EEBF00983448 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9100BF722D09EEBF00983448 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		5994AF632CF5C6AA006B4B2C /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		5994AF652CF5D05F006B4B2C /* QuizHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHeaderView.swift; sourceTree = "<group>"; };
 		5994AF672CF5D114006B4B2C /* AnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCell.swift; sourceTree = "<group>"; };
+		9100BF702D09EE4300983448 /* ScorePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScorePageViewController.swift; sourceTree = "<group>"; };
+		9100BF722D09EEBF00983448 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,7 @@
 		59202CBE2CE381A80008BD59 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				9100BF6F2D09ED7900983448 /* ScorePage */,
 				5994AF5E2CF5C4BC006B4B2C /* QuestionPage */,
 				5938F81D2CE624E700B56916 /* HomePage */,
 				59202CC02CE3A7EF0008BD59 /* StartPage */,
@@ -222,6 +227,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		9100BF6F2D09ED7900983448 /* ScorePage */ = {
+			isa = PBXGroup;
+			children = (
+				9100BF722D09EEBF00983448 /* Extension.swift */,
+				9100BF702D09EE4300983448 /* ScorePageViewController.swift */,
+			);
+			path = ScorePage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -292,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9100BF732D09EEBF00983448 /* Extension.swift in Sources */,
 				59202CC62CE3AA750008BD59 /* UIViewExtension.swift in Sources */,
 				5938F8232CE62F9300B56916 /* Subject.swift in Sources */,
 				5938F81A2CE4E3C600B56916 /* UIStackViewExtension.swift in Sources */,
@@ -300,6 +315,7 @@
 				59202CAE2CE374730008BD59 /* StartPageViewController.swift in Sources */,
 				59202CAA2CE374730008BD59 /* AppDelegate.swift in Sources */,
 				5938F8212CE62B6500B56916 /* SubjectCell.swift in Sources */,
+				9100BF712D09EE4300983448 /* ScorePageViewController.swift in Sources */,
 				59202CAC2CE374730008BD59 /* SceneDelegate.swift in Sources */,
 				5994AF642CF5C6AA006B4B2C /* QuizViewController.swift in Sources */,
 				5938F8182CE4D6D300B56916 /* CustomButton.swift in Sources */,
