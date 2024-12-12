@@ -11,6 +11,7 @@ final class StartPageViewController: UIViewController {
     
     // MARK: - Properties
     private var backgroundImageTopConstraint: NSLayoutConstraint!
+    private let viewModel: StartPageViewModel
     
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
@@ -52,11 +53,12 @@ final class StartPageViewController: UIViewController {
         return field
     }()
     
-    private let startButton: CustomButton = {
+    private lazy var startButton: CustomButton = {
         let button = CustomButton(
             title: Constants.Label.startButtonText,
             height: Constants.Layout.startButtonHeight
         )
+        button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -68,6 +70,16 @@ final class StartPageViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+    
+    // MARK: - Initialization
+    init(viewModel: StartPageViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -204,6 +216,25 @@ final class StartPageViewController: UIViewController {
         backgroundImageTopConstraint.constant = Constants.Layout.backgroundImageTopAnchor
         UIView.animate(withDuration: 0.1) {
             self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func startButtonTapped() {
+        guard let name = textField.text, !name.isEmpty else {
+            return
+        }
+        Task {
+            let result = await viewModel.loginUser(with: name)
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    let homeVC = HomePageViewController()
+                    self.navigationController?.pushViewController(homeVC, animated: true)
+                case .failure(let error):
+                    print("❌ Login failed: \(error)")
+                }
+            }
         }
     }
     

@@ -30,6 +30,10 @@
 		5994AF642CF5C6AA006B4B2C /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF632CF5C6AA006B4B2C /* QuizViewController.swift */; };
 		5994AF662CF5D05F006B4B2C /* QuizHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF652CF5D05F006B4B2C /* QuizHeaderView.swift */; };
 		5994AF682CF5D114006B4B2C /* AnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF672CF5D114006B4B2C /* AnswerCell.swift */; };
+		5994AF892D0AC437006B4B2C /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF872D0AC437006B4B2C /* UserData.xcdatamodeld */; };
+		5994AF8C2D0AC517006B4B2C /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF8B2D0AC517006B4B2C /* UserDataModel.swift */; };
+		5994AF8F2D0AC604006B4B2C /* DataComunication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF8E2D0AC604006B4B2C /* DataComunication.swift */; };
+		5994AF912D0AC6A3006B4B2C /* StartPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5994AF902D0AC6A3006B4B2C /* StartPageViewModel.swift */; };
 		9100BF712D09EE4300983448 /* ScorePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9100BF702D09EE4300983448 /* ScorePageViewController.swift */; };
 		9100BF732D09EEBF00983448 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9100BF722D09EEBF00983448 /* Extension.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +64,10 @@
 		5994AF632CF5C6AA006B4B2C /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		5994AF652CF5D05F006B4B2C /* QuizHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHeaderView.swift; sourceTree = "<group>"; };
 		5994AF672CF5D114006B4B2C /* AnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCell.swift; sourceTree = "<group>"; };
+		5994AF882D0AC437006B4B2C /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
+		5994AF8B2D0AC517006B4B2C /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
+		5994AF8E2D0AC604006B4B2C /* DataComunication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataComunication.swift; sourceTree = "<group>"; };
+		5994AF902D0AC6A3006B4B2C /* StartPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageViewModel.swift; sourceTree = "<group>"; };
 		9100BF702D09EE4300983448 /* ScorePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScorePageViewController.swift; sourceTree = "<group>"; };
 		9100BF722D09EEBF00983448 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +102,9 @@
 		59202CA82CE374730008BD59 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
+				5994AF8D2D0AC5D0006B4B2C /* Data */,
+				5994AF8A2D0AC507006B4B2C /* Model */,
+				5994AF862D0AC41D006B4B2C /* CoreData */,
 				59202CBD2CE381970008BD59 /* App */,
 				59202CBE2CE381A80008BD59 /* Screens */,
 				59202CC12CE3A8950008BD59 /* Constants */,
@@ -138,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				59202CAD2CE374730008BD59 /* StartPageViewController.swift */,
+				5994AF902D0AC6A3006B4B2C /* StartPageViewModel.swift */,
 			);
 			path = StartPage;
 			sourceTree = "<group>";
@@ -227,6 +239,30 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		5994AF862D0AC41D006B4B2C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				5994AF872D0AC437006B4B2C /* UserData.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		5994AF8A2D0AC507006B4B2C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5994AF8B2D0AC517006B4B2C /* UserDataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5994AF8D2D0AC5D0006B4B2C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5994AF8E2D0AC604006B4B2C /* DataComunication.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		9100BF6F2D09ED7900983448 /* ScorePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,7 +348,9 @@
 				5938F81A2CE4E3C600B56916 /* UIStackViewExtension.swift in Sources */,
 				5938F81F2CE6251E00B56916 /* HomePageViewController.swift in Sources */,
 				5994AF662CF5D05F006B4B2C /* QuizHeaderView.swift in Sources */,
+				5994AF892D0AC437006B4B2C /* UserData.xcdatamodeld in Sources */,
 				59202CAE2CE374730008BD59 /* StartPageViewController.swift in Sources */,
+				5994AF8F2D0AC604006B4B2C /* DataComunication.swift in Sources */,
 				59202CAA2CE374730008BD59 /* AppDelegate.swift in Sources */,
 				5938F8212CE62B6500B56916 /* SubjectCell.swift in Sources */,
 				9100BF712D09EE4300983448 /* ScorePageViewController.swift in Sources */,
@@ -321,12 +359,14 @@
 				5938F8182CE4D6D300B56916 /* CustomButton.swift in Sources */,
 				5994AF602CF5C4E5006B4B2C /* QuizProgressView.swift in Sources */,
 				5994AF552CEC8914006B4B2C /* ScorePopUp.swift in Sources */,
+				5994AF912D0AC6A3006B4B2C /* StartPageViewModel.swift in Sources */,
 				5994AF622CF5C5A3006B4B2C /* QuizQuestionView.swift in Sources */,
 				5994AF572CEC8937006B4B2C /* PopupButton.swift in Sources */,
 				5938F8272CE63A7C00B56916 /* CustomRoundButton.swift in Sources */,
 				5994AF512CE77939006B4B2C /* GPAView.swift in Sources */,
 				59202CC32CE3A8A30008BD59 /* Constants.swift in Sources */,
 				5994AF682CF5D114006B4B2C /* AnswerCell.swift in Sources */,
+				5994AF8C2D0AC517006B4B2C /* UserDataModel.swift in Sources */,
 				5994AF532CEC86AE006B4B2C /* CustomPopUp.swift in Sources */,
 				5938F8152CE4D6B800B56916 /* UIColorExtension.swift in Sources */,
 			);
@@ -551,6 +591,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5994AF872D0AC437006B4B2C /* UserData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5994AF882D0AC437006B4B2C /* UserData.xcdatamodel */,
+			);
+			currentVersion = 5994AF882D0AC437006B4B2C /* UserData.xcdatamodel */;
+			name = UserData.xcdatamodeld;
+			path = /Users/ioramka/Desktop/QuizApp2/QuizApp/CoreData/UserData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 59202C9E2CE374730008BD59 /* Project object */;
 }
