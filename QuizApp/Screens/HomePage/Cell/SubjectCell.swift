@@ -173,8 +173,8 @@ final class SubjectCell: UITableViewCell {
     // MARK: - Configuration Method
     
     func configure(with subject: Subject) {
-        iconImageView.image = subject.icon
-        titleLabel.text = subject.title
-        descriptionLabel.text = subject.description
+        iconImageView.image = UIImage(named: subject.icon)
+        titleLabel.text = subject.subjectTitle
+        descriptionLabel.text = subject.quizDescription
     }
 }

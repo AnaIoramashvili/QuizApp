@@ -43,7 +43,7 @@ final class GPAView: UIView {
         return label
     }()
     
-    private let gpaDigit: UILabel = {
+    private let scoreLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.HomePageConstants.gpaDigit
         label.textColor = Constants.Colors.yellowPrimary
@@ -55,6 +55,7 @@ final class GPAView: UIView {
         let button = UIButton()
         button.setTitle(Constants.HomePageConstants.detailsButtonText, for: .normal)
         button.setTitleColor(Constants.Colors.neutralWhite, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: Constants.FontSizes.small)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -89,7 +90,7 @@ final class GPAView: UIView {
     private func setupHierarchy() {
         gpaStackView.addArrangedSubviews(
             gpaLabel,
-            gpaDigit
+            scoreLabel
         )
         
         addSubview(gpaView)
@@ -110,7 +111,6 @@ final class GPAView: UIView {
     }
 
     // MARK: - Constraints Setup Methods
-    
     private func setupGPAViewConstraints() {
         NSLayoutConstraint.activate([
             gpaView.topAnchor.constraint(equalTo: topAnchor),
@@ -166,5 +166,10 @@ final class GPAView: UIView {
             nextArrow.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.nextArrowHeight),
             nextArrow.widthAnchor.constraint(equalToConstant: Constants.HomePageConstants.nextArrowWidth)
         ])
+    }
+    
+    // MARK: - Public Methods
+    func updateScore(_ score: Double) {
+        scoreLabel.text = String(format: "%.1f", max(0, min(score, 4.0)))
     }
 }

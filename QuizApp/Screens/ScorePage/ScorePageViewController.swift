@@ -69,7 +69,6 @@ final class ScorePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
-        loadScores()
     }
     
     // MARK: - Setup Methods
@@ -181,12 +180,6 @@ final class ScorePageViewController: UIViewController {
     }
     
     // MARK: - Private Methods
-    private func loadScores() {
-        //I'm simulating some data 
-        subjectsWithScores = subjects.map { ($0, 4) }
-        updateUI()
-    }
-    
     private func updateUI() {
         let hasScores = subjectsWithScores.contains { $0.score > 0 }
         emptyStateLabel.isHidden = hasScores

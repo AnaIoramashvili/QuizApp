@@ -75,23 +75,23 @@ final class CustomPopUp: UIView {
 
     private func setupHierarchy() {
         addSubviews(stackView)
-        buttonsStackView.addArrangedSubviews(
-            rejectButton,
-            acceptButton
-        )
+        
         stackView.addArrangedSubviews(
             questionLabel,
             buttonsStackView
         )
+        buttonsStackView.addArrangedSubviews(
+            rejectButton,
+            acceptButton
+        )
     }
     // MARK: - Constraints
-
     private func mainStackViewConstraints() {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.Sizing.verticalPadding),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.Sizing.sidePadding),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.Sizing.sidePadding),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Constants.Sizing.verticalPadding)
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.Sizing.sidePadding),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.Sizing.verticalPadding)
         ])
     }
 
@@ -101,7 +101,6 @@ final class CustomPopUp: UIView {
     }
 
     // MARK: - Actions
-    
     var acceptButtonTap: (() -> Void)?
     var rejectButtonTap: (() -> Void)?
     
@@ -119,8 +118,8 @@ extension CustomPopUp {
     enum Constants {
         enum Sizing {
             static let radius: CGFloat = 31
-            static let sidePadding: CGFloat = -24
-            static let verticalPadding: CGFloat = -39
+            static let sidePadding: CGFloat = 24
+            static let verticalPadding: CGFloat = 20
             static let stackViewSpacing: CGFloat = 20
             static let buttonsSpacing: CGFloat = 10
         }
