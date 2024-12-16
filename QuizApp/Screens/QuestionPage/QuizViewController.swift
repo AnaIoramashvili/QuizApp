@@ -132,7 +132,7 @@ final class QuizViewController: UIViewController, QuizHeaderViewDelegate {
             mainStackView.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor,
                 constant: -Constants.QuizViewControllerConstants.mainStackViewHorizontalPadding
-            ),
+            )
         ])
     }
 
@@ -152,7 +152,7 @@ final class QuizViewController: UIViewController, QuizHeaderViewDelegate {
             ),
             answersTableView.heightAnchor.constraint(
                 equalToConstant: Constants.QuizViewControllerConstants.answersTableViewHeight
-            ),
+            )
         ])
     }
 
@@ -169,7 +169,7 @@ final class QuizViewController: UIViewController, QuizHeaderViewDelegate {
             nextButton.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor,
                 constant: -Constants.QuizViewControllerConstants.nextButtonHorizontalPadding
-            ),
+            )
         ])
     }
     
@@ -178,8 +178,7 @@ final class QuizViewController: UIViewController, QuizHeaderViewDelegate {
             dimmedView.topAnchor.constraint(equalTo: view.topAnchor),
             dimmedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             dimmedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            dimmedView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
+            dimmedView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     

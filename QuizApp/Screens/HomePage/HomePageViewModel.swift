@@ -9,14 +9,18 @@ import Foundation
 
 final class HomePageViewModel {
     private let dataCommunication = DataCommunication.shared
-    private var currentUser: UserDataModel?
+    private var currentUser: UserDataModel
+    
+    init(currentUser: UserDataModel) {
+        self.currentUser = currentUser
+    }
     
     var userName: String {
-        return currentUser?.name ?? "User"
+        return currentUser.name ?? "User"
     }
     
     var subjects: [String: Int] {
-        return currentUser?.subject ?? [:]
+        return currentUser.subject ?? [:]
     }
     
     func setCurrentUser(_ user: UserDataModel) {
@@ -25,7 +29,7 @@ final class HomePageViewModel {
     }
     
     func updateScore(for subject: String, score: Int) async -> Result<Void, DataCommunicationError> {
-        guard let userName = currentUser?.name else {
+        guard let userName = currentUser.name else {
             return .failure(.userNotFound)
         }
         
@@ -38,9 +42,10 @@ final class HomePageViewModel {
     }
     
     var calculateGPA: Double {
-        guard let subjects = currentUser?.subject, !subjects.isEmpty else { return 0.0 }
+        guard let subjects = currentUser.subject, !subjects.isEmpty else { return 0.0 }
         
         let totalPercentage = subjects.values.reduce(0, +)
         let gpa = Double(totalPercentage) / Double(subjects.count) / 25.0
         return min(gpa, 4.0)
-    }}
+    }
+}

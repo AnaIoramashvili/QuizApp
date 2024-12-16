@@ -76,7 +76,7 @@ final class HomePageViewController: UIViewController {
     }()
     
     init(user: UserDataModel) {
-        self.viewModel = HomePageViewModel()
+        self.viewModel = HomePageViewModel(currentUser: user)
         super.init(nibName: nil, bundle: nil)
         viewModel.setCurrentUser(user)
     }
