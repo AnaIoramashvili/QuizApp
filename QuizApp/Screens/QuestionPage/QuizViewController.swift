@@ -234,13 +234,17 @@ final class QuizViewController: UIViewController, QuizHeaderViewDelegate {
         quitPopup.configure(question: Constants.QuizViewControllerConstants.quitQuizText)
         
         quitPopup.acceptButtonTap = { [weak self] in
+            self?.dimmedView.removeFromSuperview()
             self?.navigateToHome()
         }
         
         quitPopup.rejectButtonTap = { [weak quitPopup] in
             quitPopup?.removeFromSuperview()
+            self.dimmedView.removeFromSuperview() 
         }
         
+        view.addSubview(dimmedView)
+        setupDimmedViewConstraints()
         view.addSubview(quitPopup)
         quitPopup.translatesAutoresizingMaskIntoConstraints = false
         

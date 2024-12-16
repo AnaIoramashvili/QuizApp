@@ -75,6 +75,14 @@ final class HomePageViewController: UIViewController {
         return popUp
     }()
     
+    private lazy var dimmedView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white.withAlphaComponent(Constants.QuizViewControllerConstants.alphaComponent)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        return view
+    }()
+    
     init(user: UserDataModel) {
         self.viewModel = HomePageViewModel(currentUser: user)
         super.init(nibName: nil, bundle: nil)
@@ -117,6 +125,7 @@ final class HomePageViewController: UIViewController {
             tableView,
             bottomSeparatorLine,
             logOutButton,
+            dimmedView,
             popUp
         )
     }
@@ -128,6 +137,7 @@ final class HomePageViewController: UIViewController {
         setupTableViewConstraints()
         setupBottomSeparatorLineConstraints()
         setupLogOutButtonConstraints()
+        setupDimmedViewConstraints()
         setupPopUpConstraints()
     }
 
@@ -224,17 +234,28 @@ final class HomePageViewController: UIViewController {
             popUp.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Constants.HomePageConstants.popUpHeight)
         ])
     }
-
+    
+    private func setupDimmedViewConstraints() {
+        NSLayoutConstraint.activate([
+            dimmedView.topAnchor.constraint(equalTo: view.topAnchor),
+            dimmedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            dimmedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            dimmedView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
     // MARK: - Button Actions
     @objc private func handleLogOutButtonTap() {
         showPopUp()
     }
     
     private func showPopUp() {
+        dimmedView.isHidden = false
         popUp.isHidden = false
     }
-    
+
     private func dismissPopUp() {
+        dimmedView.isHidden = true
         popUp.isHidden = true
     }
     
