@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol GPAViewDelegate: AnyObject {
+    func didTapDetailsButton()
+}
+
 final class GPAView: UIView {
     
     // MARK: - Properties
+    
+    weak var delegate: GPAViewDelegate?
     
     private let gpaView: UIView = {
         let view = UIView()
@@ -57,6 +63,7 @@ final class GPAView: UIView {
         button.setTitleColor(Constants.Colors.neutralWhite, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: Constants.FontSizes.small)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(detailsButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -166,6 +173,10 @@ final class GPAView: UIView {
             nextArrow.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.nextArrowHeight),
             nextArrow.widthAnchor.constraint(equalToConstant: Constants.HomePageConstants.nextArrowWidth)
         ])
+    }
+    
+    @objc private func detailsButtonTapped() {
+        delegate?.didTapDetailsButton()
     }
     
     // MARK: - Public Methods

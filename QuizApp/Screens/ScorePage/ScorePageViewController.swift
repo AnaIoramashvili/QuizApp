@@ -40,7 +40,7 @@ final class ScorePageViewController: UIViewController {
     
     private let backButton: UIButton = {
         let backButton = UIButton()
-        backButton.setImage(UIImage(named: "backButton"), for: .normal)
+        backButton.setImage(UIImage(named: "back_button"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         return backButton

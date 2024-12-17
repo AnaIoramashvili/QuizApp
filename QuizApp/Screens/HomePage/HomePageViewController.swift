@@ -96,6 +96,7 @@ final class HomePageViewController: UIViewController {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        gpaView.delegate = self
         setUp()
     }
     
@@ -299,5 +300,12 @@ extension HomePageViewController: QuizViewControllerDelegate {
         viewModel.setCurrentUser(user)
         headerLabel.text = "გამარჯობა, \(viewModel.userName)!"
         gpaView.updateScore(viewModel.calculateGPA)
+    }
+}
+
+extension HomePageViewController: GPAViewDelegate {
+    func didTapDetailsButton() {
+        let scoreVC = ScorePageViewController()
+        navigationController?.pushViewController(scoreVC, animated: true)
     }
 }
