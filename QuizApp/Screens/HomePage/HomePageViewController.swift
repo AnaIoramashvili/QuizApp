@@ -305,7 +305,7 @@ extension HomePageViewController: QuizViewControllerDelegate {
 
 extension HomePageViewController: GPAViewDelegate {
     func didTapDetailsButton() {
-        let scoreVC = ScorePageViewController()
+        let scoreVC = ScorePageViewController(userName: viewModel.userName)
         navigationController?.pushViewController(scoreVC, animated: true)
     }
 }

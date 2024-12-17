@@ -10,11 +10,9 @@ import UIKit
 final class SubjectCell: UITableViewCell {
     
     // MARK: - Static Properties
-    
     static let identifier = Constants.SubjectTableViewCellConstants.identifier
     
     // MARK: - UI Components
-    
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = Constants.Colors.neutralLighterGray
@@ -49,6 +47,21 @@ final class SubjectCell: UITableViewCell {
         return arrowButton
     }()
     
+    private let scoreContainer: UIButton = {
+        let button = CustomRoundButton()
+        button.isUserInteractionEnabled = false
+        return button
+    }()
+    
+    private let scoreLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: Constants.FontSizes.medium)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let labelsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -68,7 +81,6 @@ final class SubjectCell: UITableViewCell {
     }()
     
     // MARK: - Initializers
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUp()
@@ -79,7 +91,6 @@ final class SubjectCell: UITableViewCell {
     }
     
     // MARK: - Setup Methods
-    
     private func setUp() {
         setUpHierarchy()
         setUpConstraints()
@@ -89,6 +100,12 @@ final class SubjectCell: UITableViewCell {
     private func setupUI() {
         backgroundColor = .clear
         selectionStyle = .none
+        
+        scoreContainer.addSubview(scoreLabel)
+        NSLayoutConstraint.activate([
+            scoreLabel.centerXAnchor.constraint(equalTo: scoreContainer.centerXAnchor),
+            scoreLabel.centerYAnchor.constraint(equalTo: scoreContainer.centerYAnchor)
+        ])
     }
     
     private func setUpHierarchy() {
@@ -102,20 +119,17 @@ final class SubjectCell: UITableViewCell {
         
         contentStackView.addArrangedSubviews(
             iconImageView,
-            labelsStackView,
-            arrowButton
+            labelsStackView
         )
     }
     
     private func setUpConstraints() {
         setupContainerViewConstraints()
         setupContentStackViewConstraints()
-        setupArrowConstraints()
         setupIconImageViewConstraints()
     }
     
     // MARK: - Constraints Setup Methods
-    
     private func setupContainerViewConstraints() {
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(
@@ -148,14 +162,7 @@ final class SubjectCell: UITableViewCell {
                 equalTo: containerView.trailingAnchor,
                 constant: Constants.SubjectTableViewCellConstants.arrowTrailingPadding
             ),
-            contentStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-        ])
-    }
-    
-    private func setupArrowConstraints() {
-        NSLayoutConstraint.activate([
-            arrowButton.widthAnchor.constraint(equalToConstant: Constants.HomePageConstants.arrowButtonWidth),
-            arrowButton.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.arrowButtonHeight)
+            contentStackView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
         ])
     }
     
@@ -170,11 +177,41 @@ final class SubjectCell: UITableViewCell {
         ])
     }
     
-    // MARK: - Configuration Method
+    private func setupAccessoryConstraints(_ view: UIView) {
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: Constants.HomePageConstants.arrowButtonWidth),
+            view.heightAnchor.constraint(equalToConstant: Constants.HomePageConstants.arrowButtonHeight)
+        ])
+    }
     
-    func configure(with subject: Subject) {
+    // MARK: - Configuration Methods
+    func configure(with subject: Subject, showArrow: Bool = true) {
         iconImageView.image = UIImage(named: subject.icon)
         titleLabel.text = subject.subjectTitle
         descriptionLabel.text = subject.quizDescription
+        
+        if let lastView = contentStackView.arrangedSubviews.last,
+           lastView != labelsStackView {
+            contentStackView.removeArrangedSubview(lastView)
+            lastView.removeFromSuperview()
+        }
+        
+        if showArrow {
+            contentStackView.addArrangedSubview(arrowButton)
+            setupAccessoryConstraints(arrowButton)
+        }
+    }
+    
+    // MARK: - Set Score Methods
+    func setScore(_ score: Int) {
+        scoreLabel.text = "\(score)"
+        
+        if let lastView = contentStackView.arrangedSubviews.last,
+           lastView != labelsStackView {
+            contentStackView.removeArrangedSubview(lastView)
+            lastView.removeFromSuperview()
+        }
+        contentStackView.addArrangedSubview(scoreContainer)
+        setupAccessoryConstraints(scoreContainer)
     }
 }
