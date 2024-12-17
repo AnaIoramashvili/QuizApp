@@ -10,15 +10,13 @@ import UIKit
 final class StartPageViewController: UIViewController {
     
     // MARK: - Properties
-    private var backgroundImageTopConstraint: NSLayoutConstraint!
+    private var backgroundTopConstraint: NSLayoutConstraint!
     private let viewModel: StartPageViewModel
     
-    private let backgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: Constants.Images.backgroundShape)
-        imageView.contentMode = .scaleToFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    private let backgroundView: CurvedBackgroundView = {
+        let view = CurvedBackgroundView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let titleLabel: UILabel = {
@@ -112,7 +110,7 @@ final class StartPageViewController: UIViewController {
         )
         
         view.addSubviews(
-            backgroundImageView,
+            backgroundView,
             titleLabel,
             illustrationImageView,
             inputStackView
@@ -120,7 +118,7 @@ final class StartPageViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        setupBackgroundImageConstraints()
+        setupBackgroundViewConstraints()
         setupTitleLabelConstraints()
         setupIllustrationImageConstraints()
         setupStackViewConstraints()
@@ -128,20 +126,19 @@ final class StartPageViewController: UIViewController {
         setupStartButtonConstraints()
     }
 
-    private func setupBackgroundImageConstraints() {
-        backgroundImageTopConstraint = backgroundImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.Layout.backgroundImageTopAnchor)
+    private func setupBackgroundViewConstraints() {
+        backgroundTopConstraint = backgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         
         NSLayoutConstraint.activate([
-            backgroundImageTopConstraint,
-            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Constants.Layout.backgroundImageHeightMultiplier)
+            backgroundTopConstraint,
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 
     private func setupTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: backgroundImageView.topAnchor, constant: Constants.Layout.titleLabelTopPadding),
+            titleLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: Constants.Layout.titleLabelTopPadding),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
@@ -151,13 +148,13 @@ final class StartPageViewController: UIViewController {
             illustrationImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.Layout.illustrationTopPadding),
             illustrationImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.illustrationLeadingPadding),
             illustrationImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.Layout.illustrationTrailingPadding),
-            illustrationImageView.bottomAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: Constants.Layout.illustrationBottomPadding)
+            illustrationImageView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: Constants.Layout.illustrationBottomPadding)
         ])
     }
 
     private func setupStackViewConstraints() {
         NSLayoutConstraint.activate([
-            inputStackView.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: Constants.Layout.backgroundBottom)
+            inputStackView.topAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: Constants.Layout.backgroundBottom)
         ])
     }
 
@@ -206,14 +203,14 @@ final class StartPageViewController: UIViewController {
     }
     
     @objc private func keyboardWillShow() {
-        backgroundImageTopConstraint.constant = Constants.Layout.keyboardAdjustmentOffset
+        backgroundTopConstraint.constant = Constants.Layout.keyboardAdjustmentOffset
         UIView.animate(withDuration: 0.1) {
             self.view.layoutIfNeeded()
         }
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        backgroundImageTopConstraint.constant = Constants.Layout.backgroundImageTopAnchor
+        backgroundTopConstraint.constant = Constants.Layout.backgroundImageTopAnchor
         UIView.animate(withDuration: 0.1) {
             self.view.layoutIfNeeded()
         }
