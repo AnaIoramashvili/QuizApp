@@ -7,9 +7,16 @@
 
 import UIKit
 
-final class QuizViewController: UIViewController {
+protocol QuizViewControllerDelegate: AnyObject {
+    func quizViewControllerDidFinish(_ controller: QuizViewController, with user: UserDataModel)
+}
+
+final class QuizViewController: UIViewController, QuizHeaderViewDelegate {
+    
+    weak var delegate: QuizViewControllerDelegate?
     
     // MARK: - Properties
+    private let viewModel: QuizViewModel
     private let headerView = QuizHeaderView()
     private let progressView = QuizProgressView()
     private let questionView = QuizQuestionView()
@@ -39,18 +46,39 @@ final class QuizViewController: UIViewController {
     }()
     
     private lazy var mainStackView: UIStackView = {
-        let stack = UIStackView(
-            arrangedSubviews: [
-                headerView,
-                progressView,
-                questionView
-            ]
-        )
+        let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = Constants.QuizViewControllerConstants.mainStackViewSpacing
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    
+    private lazy var scorePopUp: ScorePopUp = {
+        let popUp = ScorePopUp()
+        popUp.closeAction = { [weak self] in
+            self?.navigateToHome()
+        }
+        popUp.translatesAutoresizingMaskIntoConstraints = false
+        return popUp
+    }()
+    
+    private lazy var dimmedView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white.withAlphaComponent(Constants.QuizViewControllerConstants.alphaComponent)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    // MARK: - Initialization
+    init(subject: Subject, userName: String) {
+        self.viewModel = QuizViewModel(subject: subject, userName: userName)
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -75,7 +103,12 @@ final class QuizViewController: UIViewController {
             mainStackView,
             answersTableView,
             nextButton
-           )
+        )
+        mainStackView.addArrangedSubviews(
+            headerView,
+            progressView,
+            questionView
+        )
     }
     
     // MARK: - Setup
@@ -99,7 +132,7 @@ final class QuizViewController: UIViewController {
             mainStackView.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor,
                 constant: -Constants.QuizViewControllerConstants.mainStackViewHorizontalPadding
-            ),
+            )
         ])
     }
 
@@ -119,7 +152,7 @@ final class QuizViewController: UIViewController {
             ),
             answersTableView.heightAnchor.constraint(
                 equalToConstant: Constants.QuizViewControllerConstants.answersTableViewHeight
-            ),
+            )
         ])
     }
 
@@ -136,47 +169,124 @@ final class QuizViewController: UIViewController {
             nextButton.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor,
                 constant: -Constants.QuizViewControllerConstants.nextButtonHorizontalPadding
-            ),
+            )
         ])
     }
     
-    // MARK: - Configure Views
-    private func configureViews() {
-        headerView.configure(with: "პროგრამირება")
-        progressView.updateProgress(currentQuestion: 1, totalQuestions: 10)
-        progressView.updatePoints(points: 1)
-        questionView.configure(question: "რომელია ყველაზე პოპულარული პროგრამირების ენა?")
+    private func setupDimmedViewConstraints() {
+        NSLayoutConstraint.activate([
+            dimmedView.topAnchor.constraint(equalTo: view.topAnchor),
+            dimmedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            dimmedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            dimmedView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
-    // Sample data
-    private var answers = ["Python", "Java", "C++", "Kotlin"]
-    private var selectedAnswerIndex: Int?
-    private var correctAnswerIndex = 1
+    // MARK: - Configuration Methods
+    private func configureViews() {
+        let progress = viewModel.questionProgress
+        
+        headerView.configure(with: viewModel.subjectTitle)
+        progressView.updateProgress(
+            currentQuestion: progress.current,
+            totalQuestions: progress.total
+        )
+        progressView.updatePoints(points: viewModel.points)
+        questionView.configure(question: viewModel.currentQuestion.title)
+        answersTableView.reloadData()
+        
+        headerView.delegate = self
+    }
+    
+    // MARK: - Navigation Methods
+    private func navigateToHome() {
+        Task {
+            do {
+                if let user = try await DataCommunication.shared.getUser(by: viewModel.userName) {
+                    delegate?.quizViewControllerDidFinish(self, with: user)
+                    DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+            } catch {
+                print("Error fetching user data: \(error)")
+            }
+        }
+    }
+    
+    private func showResults() {
+        view.addSubview(dimmedView)
+        view.addSubview(scorePopUp)
+        setupDimmedViewConstraints()
+        
+        NSLayoutConstraint.activate([
+            scorePopUp.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scorePopUp.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            scorePopUp.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Constants.QuizViewControllerConstants.scorepopUpWidth),
+            scorePopUp.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Constants.QuizViewControllerConstants.scorepopUpHeight)
+        ])
+        
+        scorePopUp.configure(points: viewModel.points)
+    }
+    
+    private func showQuitConfirmationPopup() {
+        let quitPopup = CustomPopUp()
+        quitPopup.configure(question: Constants.QuizViewControllerConstants.quitQuizText)
+        
+        quitPopup.acceptButtonTap = { [weak self] in
+            self?.dimmedView.removeFromSuperview()
+            self?.navigateToHome()
+        }
+        
+        quitPopup.rejectButtonTap = { [weak quitPopup] in
+            quitPopup?.removeFromSuperview()
+            self.dimmedView.removeFromSuperview() 
+        }
+        
+        view.addSubview(dimmedView)
+        setupDimmedViewConstraints()
+        view.addSubview(quitPopup)
+        quitPopup.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            quitPopup.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            quitPopup.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            quitPopup.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Constants.QuizViewControllerConstants.quitpopUpWidth),
+            quitPopup.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Constants.QuizViewControllerConstants.quitpopUpHeight)
+        ])
+    }
+    
+    // MARK: - QuizHeaderViewDelegate
+    func didTapCloseButton() {
+        showQuitConfirmationPopup()
+    }
     
     // MARK: - Actions
     @objc private func nextButtonTapped() {
-        
+        viewModel.moveToNextQuestion()
     }
 }
 
 // MARK: - UITableViewDataSource
 extension QuizViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return answers.count
+        return viewModel.numberOfOptions
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.identifier, for: indexPath) as? AnswerCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: AnswerCell.identifier,
+            for: indexPath
+        ) as? AnswerCell else {
             return UITableViewCell()
         }
         
-        cell.configure(with: answers[indexPath.row])
+        cell.configure(with: viewModel.getOptionTitle(at: indexPath.row))
         
-        if let selectedIndex = selectedAnswerIndex {
+        if let selectedIndex = viewModel.selectedAnswerIndex {
             if selectedIndex == indexPath.row {
-                let isCorrect = selectedIndex == correctAnswerIndex
-                cell.updateState(isCorrect: isCorrect)
-            } else if indexPath.row == correctAnswerIndex {
+                cell.updateState(isCorrect: viewModel.isOptionCorrect(at: indexPath.row))
+            } else if viewModel.isOptionCorrect(at: indexPath.row) {
                 cell.markAsCorrect()
             } else {
                 cell.resetState()
@@ -184,33 +294,35 @@ extension QuizViewController: UITableViewDataSource {
         } else {
             cell.resetState()
         }
-        
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Constants.QuizViewControllerConstants.heightForRow
     }
 }
 
 // MARK: - UITableViewDelegate
 extension QuizViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard selectedAnswerIndex == nil else { return }
-        
-        selectedAnswerIndex = indexPath.row
-        let isCorrect = indexPath.row == correctAnswerIndex
-        
-        if let selectedCell = tableView.cellForRow(at: indexPath) as? AnswerCell {
-            selectedCell.updateState(isCorrect: isCorrect)
-        }
-        
-        if !isCorrect {
-            let correctIndexPath = IndexPath(row: correctAnswerIndex, section: 0)
-            if let correctCell = tableView.cellForRow(at: correctIndexPath) as? AnswerCell {
-                correctCell.markAsCorrect()
-            }
-        }
-        tableView.allowsSelection = false
+        viewModel.selectAnswer(at: indexPath.row)
+    }
+}
+
+// MARK: - QuizViewModelDelegate
+extension QuizViewController: QuizViewModelDelegate {
+    func didUpdateQuestion() {
+        answersTableView.allowsSelection = true
+        configureViews()
+    }
+    
+    func didCompleteQuiz(withScore points: Int) {
+        showResults()
+    }
+    
+    func didSelectAnswer(at index: Int, isCorrect: Bool) {
+        progressView.updatePoints(points: viewModel.points)
+        answersTableView.reloadData()
+        answersTableView.allowsSelection = false
+    }
+    
+    func didUpdateNextButtonTitle(_ title: String) {
+        nextButton.setTitle(title, for: .normal)
     }
 }

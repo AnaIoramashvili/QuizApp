@@ -27,7 +27,7 @@ final class QuizHeaderView: UIView {
         let button = UIButton()
         let image = UIImage(named: Constants.QuizHeaderViewConstants.closeButtonImage)
         button.setImage(image, for: .normal)
-        button.addTarget(QuizHeaderView.self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         return button
     }()
     

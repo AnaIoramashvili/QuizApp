@@ -55,7 +55,43 @@ final class DataCommunication {
             throw DataCommunicationError.failedToSaveUser
         }
     }
+    
+    func updateUserScore(for name: String, subject: String, score: Int) async throws {
+        let context = container.viewContext
+        let fetchRequest: NSFetchRequest<UserDataModel> = UserDataModel.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
         
+        guard let user = try context.fetch(fetchRequest).first else {
+            throw DataCommunicationError.userNotFound
+        }
+        
+        var subjects = user.subject ?? [:]
+        let currentHighestScore = subjects[subject] ?? 0
+        
+        if score > currentHighestScore {
+            subjects[subject] = score
+            user.subject = subjects
+            
+            try context.save()
+            print("Score updated for user '\(name)': \(subject) = \(score)")
+        } else {
+            print("New score \(score) is not higher than the current highest score (\(currentHighestScore)) for \(subject). Score not updated.")
+        }
+    }
+    
+    func getHighestScore(for name: String, subject: String) async throws -> Int {
+        let context = container.viewContext
+        let fetchRequest: NSFetchRequest<UserDataModel> = UserDataModel.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+        
+        guard let user = try context.fetch(fetchRequest).first else {
+            throw DataCommunicationError.userNotFound
+        }
+        
+        let subjects = user.subject ?? [:]
+        return subjects[subject] ?? 0
+    }
+    
     func getUser(by name: String) async throws -> UserDataModel? {
         let context = container.viewContext
         
