@@ -105,13 +105,16 @@ struct Constants {
         static let logoutButtonBottomPadding: CGFloat = -11
         static let logoutButtonHeight: CGFloat = 43
         static let logoutButtonWidth: CGFloat = 43
+        static let popUpWidth: CGFloat = 0.8
+        static let popUpHeight: CGFloat = 0.2
     
         //Text
         static let helloText = "გამარჯობა, ირაკლი"
         static let chooseSubject = "აირჩიე საგანი"
         static let gpaText = "GPA -"
-        static let gpaDigit = "4.0"
+        static let gpaDigit = "0.0"
         static let detailsButtonText = "დეტალურად"
+        static let logoutQuestion = "ნამდვილად გსურს გასვლა?"
     }
     
     struct SubjectTableViewCellConstants {
@@ -172,6 +175,12 @@ struct Constants {
         static let nextButtonTopPadding: CGFloat = 63
         static let nextButtonHorizontalPadding: CGFloat = 16
         static let heightForRow: CGFloat = 72
+        static let alphaComponent:  CGFloat = 0.7
+        static let quitQuizText = "ნამდვილად გსურს ქვიზის შეწყვეტა?"
+        static let quitpopUpWidth: CGFloat = 0.8
+        static let quitpopUpHeight: CGFloat = 0.2
+        static let scorepopUpWidth: CGFloat = 0.8
+        static let scorepopUpHeight: CGFloat = 0.2
     }
     
     struct AnswerCellConstants {

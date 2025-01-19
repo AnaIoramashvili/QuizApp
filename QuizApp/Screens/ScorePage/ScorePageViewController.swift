@@ -40,7 +40,7 @@ final class ScorePageViewController: UIViewController {
     
     private let backButton: UIButton = {
         let backButton = UIButton()
-        backButton.setImage(UIImage(named: "backButton"), for: .normal)
+        backButton.setImage(UIImage(named: "back_button"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         return backButton
@@ -56,20 +56,53 @@ final class ScorePageViewController: UIViewController {
     private let logOutButton: UIButton = {
         let logOutButton = CustomRoundButton()
         logOutButton.configure(with: UIImage(named: Constants.Images.logOutButton))
+        logOutButton.addTarget(self, action: #selector(handleLogOutButtonTap), for: .touchUpInside)
         return logOutButton
     }()
     
+    private lazy var popUp: CustomPopUp = {
+        let popUp = CustomPopUp()
+        popUp.configure(question: Constants.HomePageConstants.logoutQuestion)
+        popUp.isHidden = true
+        popUp.acceptButtonTap = { [weak self] in
+            self?.logOutUser()
+        }
+        popUp.rejectButtonTap = { [weak self] in
+            self?.dismissPopUp()
+        }
+        return popUp
+    }()
+    
+    private lazy var dimmedView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white.withAlphaComponent(Constants.QuizViewControllerConstants.alphaComponent)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        return view
+    }()
+    
+    private var userName: String
     private var subjectsWithScores: [(subject: Subject, score: Int)] = [] {
         didSet {
             updateUI()
         }
     }
     
+    // MARK: - Initialization
+    init(userName: String) {
+        self.userName = userName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
-        loadScores()
+        fetchUserScores()
     }
     
     // MARK: - Setup Methods
@@ -91,7 +124,9 @@ final class ScorePageViewController: UIViewController {
             emptyStateLabel,
             backButton,
             bottomSeparatorLine,
-            logOutButton
+            logOutButton,
+            dimmedView,
+            popUp
         )
     }
     
@@ -102,6 +137,8 @@ final class ScorePageViewController: UIViewController {
         setUpEmptyStateLabelConstraints()
         setUpBottomSeparatorConstraints()
         setUpLogOutButtonConstraints()
+        setupDimmedViewConstraints()
+        setupPopUpConstraints()
     }
     
     private func setUpHeaderConstraints() {
@@ -180,11 +217,66 @@ final class ScorePageViewController: UIViewController {
         ])
     }
     
-    // MARK: - Private Methods
-    private func loadScores() {
-        //I'm simulating some data 
-        subjectsWithScores = subjects.map { ($0, 4) }
-        updateUI()
+    private func setupPopUpConstraints() {
+        NSLayoutConstraint.activate([
+            popUp.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            popUp.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            popUp.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Constants.HomePageConstants.popUpWidth),
+            popUp.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Constants.HomePageConstants.popUpHeight)
+        ])
+    }
+    
+    private func setupDimmedViewConstraints() {
+        NSLayoutConstraint.activate([
+            dimmedView.topAnchor.constraint(equalTo: view.topAnchor),
+            dimmedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            dimmedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            dimmedView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    // MARK: - Button Methods
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func handleLogOutButtonTap() {
+        showPopUp()
+    }
+    
+    private func showPopUp() {
+        dimmedView.isHidden = false
+        popUp.isHidden = false
+    }
+
+    private func dismissPopUp() {
+        dimmedView.isHidden = true
+        popUp.isHidden = true
+    }
+    
+    private func logOutUser() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    // MARK: - Fetch Methods
+    private func fetchUserScores() {
+        Task {
+            do {
+                if let user = try await DataCommunication.shared.getUser(by: userName) {
+                    let subjects = MockData.subjects
+                    let scores = subjects.map { subject -> (subject: Subject, score: Int) in
+                        let score = user.subject?[subject.subjectTitle] ?? 0
+                        print(score)
+                        return (subject: subject, score: score)
+                    }
+                    DispatchQueue.main.async {
+                        self.subjectsWithScores = scores
+                    }
+                }
+            } catch {
+                print("Error fetching user data: \(error)")
+            }
+        }
     }
     
     private func updateUI() {
@@ -193,16 +285,12 @@ final class ScorePageViewController: UIViewController {
         tableView.isHidden = !hasScores
         tableView.reloadData()
     }
-    
-    @objc private func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
 }
 
 // MARK: - UITableViewDelegate & UITableViewDataSource
 extension ScorePageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subjectsWithScores.count
+        return subjectsWithScores.filter { $0.score > 0 }.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -210,8 +298,11 @@ extension ScorePageViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let subjectWithScore = subjectsWithScores[indexPath.row]
-        cell.configure(with: subjectWithScore.subject)
+        let subjectsWithNonZeroScores = subjectsWithScores.filter { $0.score > 0 }
+        let subjectWithScore = subjectsWithNonZeroScores[indexPath.row]
+        
+        cell.configure(with: subjectWithScore.subject, showArrow: false)
+        cell.setScore(subjectWithScore.score)
         return cell
     }
 }

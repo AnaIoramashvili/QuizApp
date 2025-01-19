@@ -229,7 +229,7 @@ final class StartPageViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let user):
-                    let homeVC = HomePageViewController()
+                    let homeVC = HomePageViewController(user: user)
                     self.navigationController?.pushViewController(homeVC, animated: true)
                 case .failure(let error):
                     print("❌ Login failed: \(error)")
